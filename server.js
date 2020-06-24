@@ -64,7 +64,7 @@ app.post("/submitInsuranceRequest", function(req, res) {
 		};
 	} else {
 		var msg = {
-			to: "sayamkanwar616@gmail.com",
+			to: "autoleadsdemo@gmail.com",
 			from: "autoleadsdemo@gmail.com",
 			templateId: templates["new_user_submission"],
 			dynamic_template_data: {
