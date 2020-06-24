@@ -100,5 +100,5 @@ app.post("/submitInsuranceRequest", function(req, res) {
 	// res.redirect("http://localhost/form/1");
 });
 
-const port = 80;
+const port = process.env.PORT || 3000;
 server.listen(port);
