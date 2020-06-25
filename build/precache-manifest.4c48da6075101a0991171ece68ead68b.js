@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "03d98fcec14121e71dc49af669a1d9b2",
+    "revision": "e39aed425c1cd4b6220101387581240c",
     "url": "/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/css/2.52f2db83.chunk.css"
   },
   {
-    "revision": "8e744e25759d1eb8625c",
-    "url": "/static/css/main.f9f4d2fe.chunk.css"
+    "revision": "47b69eb06a27c07039c0",
+    "url": "/static/css/main.8a33618a.chunk.css"
   },
   {
     "revision": "13265a6e8110b135a00c",
@@ -20,7 +20,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/static/js/2.9016c672.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8e744e25759d1eb8625c",
+    "revision": "47b69eb06a27c07039c0",
     "url": "/static/js/main.07683aa6.chunk.js"
   },
   {
@@ -34,5 +34,13 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "c62aded729bf7146d491275e5019d7fc",
     "url": "/static/media/Gilroy-Light.c62aded7.otf"
+  },
+  {
+    "revision": "dba0c688b8d5ee09a1e214aebd5d25e4",
+    "url": "/static/media/ProductSans-Bold.dba0c688.ttf"
+  },
+  {
+    "revision": "eae9c18cee82a8a1a52e654911f8fe83",
+    "url": "/static/media/ProductSans-Regular.eae9c18c.ttf"
   }
 ]);
