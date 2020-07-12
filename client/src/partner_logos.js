@@ -1,0 +1,32 @@
+const partner_logos = [
+	{ id: 1, src: "./partner_logos/1b.png" },
+	{ id: 2, src: "./partner_logos/2b.png" },
+	{ id: 3, src: "./partner_logos/3b.png" },
+	{ id: 4, src: "./partner_logos/4b.png" },
+	{ id: 5, src: "./partner_logos/5b.png" },
+	{ id: 6, src: "./partner_logos/6b.png" },
+	{ id: 7, src: "./partner_logos/7b.png" },
+	{ id: 8, src: "./partner_logos/8b.png" },
+	{ id: 9, src: "./partner_logos/9b.png" },
+	{ id: 10, src: "./partner_logos/10b.png" },
+	{ id: 11, src: "./partner_logos/11b.png" },
+	{ id: 12, src: "./partner_logos/12b.png" },
+	{ id: 13, src: "./partner_logos/13b.png" },
+	{ id: 14, src: "./partner_logos/14b.png" },
+	{ id: 15, src: "./partner_logos/15b.png" },
+	{ id: 16, src: "./partner_logos/16b.png" },
+	{ id: 17, src: "./partner_logos/17b.png" },
+	{ id: 18, src: "./partner_logos/18b.png" },
+	{ id: 19, src: "./partner_logos/19b.png" },
+	{ id: 20, src: "./partner_logos/20b.png" },
+	{ id: 21, src: "./partner_logos/21b.png" },
+	{ id: 22, src: "./partner_logos/22b.png" },
+	{ id: 23, src: "./partner_logos/23b.png" },
+	{ id: 24, src: "./partner_logos/24b.png" },
+	{ id: 25, src: "./partner_logos/25b.png" },
+	{ id: 26, src: "./partner_logos/26b.png" },
+	{ id: 27, src: "./partner_logos/27b.png" },
+	{ id: 28, src: "./partner_logos/28b.png" }
+];
+
+export default partner_logos;

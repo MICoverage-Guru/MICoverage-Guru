@@ -4,6 +4,7 @@ var firebase = require("firebase");
 var app = express();
 var cors = require("cors");
 var path = require("path");
+var unix_timestamp = require("unix-timestamp");
 const sgMail = require("@sendgrid/mail");
 const http = require("http");
 var server = http.createServer(app);
@@ -11,6 +12,7 @@ const nocache = require("nocache");
 app.use(nocache());
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.static(path.join(__dirname, "build")));
 
@@ -19,7 +21,11 @@ sgMail.setApiKey(
 );
 
 templates = {
-	new_user_submission: "d-6e72f614681c4e06988f5bc600839e46"
+	new_user_submission: "d-6e72f614681c4e06988f5bc600839e46",
+	contact_form_submission: "d-541c50c38dcd4568b144c9badb5ad5e9",
+	referral_form_submission: "d-3a7cca55e1ea43b280ba531ad2036a3b",
+	active_customer_survey: "d-b1c856cdd9bd4039aa4413cf163fce59",
+	contact_form_survey: "d-400edfec54ca4fafa2a04d17dced5e78"
 };
 
 const firebaseConfig = {
@@ -35,83 +41,45 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-app.get("/ggwp", function(req, res) {
-	console.log("HTTP Get Request");
-	res.send("HTTP GET Request");
-	//Insert key,value pair to database
-	firebase
-		.database()
-		.ref("/")
-		.set({ TestMessage: "GET Request" });
-});
-
 app.get("/*", (req, res) => {
 	res.sendFile(path.join(__dirname, "build", "index.html"));
 });
 
-app.post("/submitInsuranceRequest", function(req, res) {
-	console.log(req.body);
-	console.log(req.body.Q1);
-	console.log(JSON.parse(req.body.vehicles_data));
+app.post("/api/submitInsuranceRequest", function(req, res) {
 	let isInsured = false;
 	var user_data;
+	let insuranceType_formatted;
+	if (req.body.insurance_type == "auto_home")
+		insuranceType_formatted = "Auto and Home Insurance";
+	else if (req.body.insurance_type == "auto")
+		insuranceType_formatted = "Auto Insurance";
+
 	if (req.body.Q1 === "Yes") {
 		isInsured = true;
-		if (req.body.Q20 === "Yes") {
-			user_data = {
-				zipCode: req.body.zip_code,
-				insuranceType: req.body.insurance_type,
-				Q1: req.body.Q1,
-				Q2: req.body.Q2,
-				Q3: req.body.Q3,
-				Q4: req.body.Q4,
-				Q5: req.body.Q5,
-				Q6: req.body.Q6,
-				vehicle_object: JSON.parse(req.body.vehicles_data),
-				Q14: req.body.Q14,
-				Q15: req.body.Q15,
-				Q16: req.body.Q16,
-				Q17: req.body.Q17,
-				insured: isInsured,
-				Q18: req.body.Q18,
-				Q19: req.body.Q19,
-				Q20: req.body.Q20,
-				Q21: req.body.Q21,
-				Q22: req.body.Q22,
-				Q23: req.body.Q23,
-				Q24: req.body.Q24,
-				Q25: req.body.Q25,
-				Q26: req.body.Q26,
-				Q27: req.body.Q27
-			};
-		} else {
-			user_data = {
-				zipCode: req.body.zip_code,
-				insuranceType: req.body.insurance_type,
-				Q1: req.body.Q1,
-				Q2: req.body.Q2,
-				Q3: req.body.Q3,
-				Q4: req.body.Q4,
-				Q5: req.body.Q5,
-				Q6: req.body.Q6,
-				vehicle_object: JSON.parse(req.body.vehicles_data),
-				Q14: req.body.Q14,
-				Q15: req.body.Q15,
-				Q16: req.body.Q16,
-				Q17: req.body.Q17,
-				insured: isInsured,
-				Q18: req.body.Q18,
-				Q19: req.body.Q19,
-				Q20: req.body.Q20,
-				Q25: req.body.Q25,
-				Q26: req.body.Q26,
-				Q27: req.body.Q27
-			};
-		}
+		user_data = {
+			zipCode: req.body.zip_code,
+			insuranceType: insuranceType_formatted,
+			Q1: req.body.Q1,
+			Q2: req.body.Q2,
+			Q3: req.body.Q3,
+			Q4: req.body.Q4,
+			Q5: req.body.Q5,
+			Q6: req.body.Q6,
+			vehicle_object: JSON.parse(req.body.vehicles_data),
+			Q14: req.body.Q14,
+			Q15: req.body.Q15,
+			Q16: req.body.Q16,
+			Q17: req.body.Q17,
+			insured: isInsured,
+			Q19: req.body.Q19,
+			Q25: req.body.Q25,
+			Q26: req.body.Q26,
+			Q27: req.body.Q27
+		};
 	} else {
 		user_data = {
 			zipCode: req.body.zip_code,
-			insuranceType: req.body.insurance_type,
+			insuranceType: insuranceType_formatted,
 			Q1: req.body.Q1,
 			Q2: req.body.Q2,
 			Q3: req.body.Q3,
@@ -135,7 +103,6 @@ app.post("/submitInsuranceRequest", function(req, res) {
 		templateId: templates["new_user_submission"],
 		dynamic_template_data: user_data
 	};
-	console.log(msg);
 	const user_database = firebase
 		.database()
 		.ref("/")
@@ -147,15 +114,13 @@ app.post("/submitInsuranceRequest", function(req, res) {
 			console.log(error);
 			res.json({ success: 0 });
 		} else {
-			console.log("Email sent!");
 			res.json({ success: 1 });
 		}
 	});
 });
 
-app.post("/scheduleAppt", function(req, res) {
+app.post("/api/scheduleAppt", function(req, res) {
 	var unique_user_id = req.body.uid;
-	console.log(unique_user_id);
 	const user_record = firebase
 		.database()
 		.ref("/")
@@ -164,10 +129,44 @@ app.post("/scheduleAppt", function(req, res) {
 	user_record.update({
 		appointmentPref: req.body.timestamp
 	});
+	var user_timestamp;
+	if (req.body.timestamp == "now") {
+		user_timestamp = unix_timestamp.now();
+	} else {
+		user_timestamp = unix_timestamp.fromDate(req.body.timestamp);
+	}
+	const email1_delivery_timestamp = parseInt(
+		unix_timestamp.add(user_timestamp, "+2h")
+	);
+	const email2_delivery_timestamp = parseInt(
+		unix_timestamp.add(user_timestamp, "+71h")
+	);
+	var email1_msg = {
+		to: req.body.email,
+		from: { email: "admin@micoverageguru.com", name: "MICoverage Guru" },
+		templateId: templates["active_customer_survey"],
+		send_at: email1_delivery_timestamp
+	};
+	sgMail.send(email1_msg, (error, result) => {
+		if (error) {
+			console.log(error);
+		}
+	});
+	var email2_msg = {
+		to: req.body.email,
+		from: { email: "admin@micoverageguru.com", name: "MICoverage Guru" },
+		templateId: templates["active_customer_survey"],
+		send_at: email2_delivery_timestamp
+	};
+	sgMail.send(email2_msg, (error, result) => {
+		if (error) {
+			console.log(error);
+		}
+	});
 	res.json({ success: 1 });
 });
 
-app.post("/subscribeToUpdates", function(req, res) {
+app.post("/api/subscribeToUpdates", function(req, res) {
 	var user_email = req.body.email;
 	const sub_db = firebase
 		.database()
@@ -177,6 +176,132 @@ app.post("/subscribeToUpdates", function(req, res) {
 		email_address: user_email
 	});
 	res.json({ success: 1 });
+});
+
+app.post("/api/contactSubmit", function(req, res) {
+	const email1_delivery_timestamp = parseInt(
+		unix_timestamp.add(unix_timestamp.now(), "+24h")
+	);
+	const email2_delivery_timestamp = parseInt(
+		unix_timestamp.add(unix_timestamp.now(), "+48h")
+	);
+	var email1_msg = {
+		to: req.body.email,
+		from: { email: "admin@micoverageguru.com", name: "MICoverage Guru" },
+		templateId: templates["contact_form_survey"],
+		send_at: email1_delivery_timestamp
+	};
+	sgMail.send(email1_msg, (error, result) => {
+		if (error) {
+			console.log(error);
+		}
+	});
+	var email2_msg = {
+		to: req.body.email,
+		from: { email: "admin@micoverageguru.com", name: "MICoverage Guru" },
+		templateId: templates["contact_form_survey"],
+		send_at: email2_delivery_timestamp
+	};
+	sgMail.send(email2_msg, (error, result) => {
+		if (error) {
+			console.log(error);
+		}
+	});
+	const user_data = {
+		name: req.body.name,
+		email: req.body.email,
+		phone: req.body.phone,
+		question: req.body.question
+	};
+	var msg = {
+		to: "admin@micoverageguru.com",
+		from: "autoleadsdemo@gmail.com",
+		templateId: templates["contact_form_submission"],
+		dynamic_template_data: user_data
+	};
+	const contact_db = firebase
+		.database()
+		.ref("/")
+		.child("ContactFormSubmissions");
+	contact_db.push(user_data);
+	sgMail.send(msg, (error, result) => {
+		if (error) {
+			console.log(error);
+			res.json({ success: 0 });
+		} else {
+			res.json({ success: 1 });
+		}
+	});
+});
+
+app.post("/api/referralSubmit", function(req, res) {
+	const user_data = {
+		name: req.body.name,
+		email: req.body.email,
+		phone: req.body.phone
+	};
+	var msg = {
+		to: "autoleadsdemo@gmail.com",
+		from: "autoleadsdemo@gmail.com",
+		templateId: templates["referral_form_submission"],
+		dynamic_template_data: user_data
+	};
+	console.log(msg);
+	const referral_db = firebase
+		.database()
+		.ref("/")
+		.child("ReferralFormSubmissions");
+	referral_db.push(user_data);
+	sgMail.send(msg, (error, result) => {
+		if (error) {
+			console.log(error);
+			res.json({ success: 0 });
+		} else {
+			res.json({ success: 1 });
+		}
+	});
+});
+
+app.post("/adminAuth", function(req, res) {
+	var authkey = req.body.authkey;
+	if (authkey == "dangilbert") {
+		res.cookie(
+			"session_token",
+			Math.random()
+				.toString(36)
+				.substring(2, 15)
+		);
+		res.redirect("/admin/user_details");
+	} else {
+		res.redirect("/admin");
+	}
+});
+
+app.post("/api/getUserRecords", function(req, res) {
+	const user_db = firebase
+		.database()
+		.ref("/")
+		.child("UserDetails");
+	user_db.on("value", snapshot => {
+		let objs = Object.values(snapshot.val());
+		let toPushArray = [];
+		for (var i = 0; i < objs.length; i++) {
+			let obj = objs[i];
+			let toPushObj = {
+				fname: obj.Q4,
+				lname: obj.Q5,
+				email: obj.Q25,
+				phone: obj.Q27,
+				apptPref: obj.appointmentPref
+					? obj.appointmentPref === "now"
+						? obj.appointmentPref
+						: obj.appointmentPref.split("T").join(" ")
+					: "didn't select"
+			};
+			toPushArray.push(toPushObj);
+		}
+		res.send(toPushArray);
+	});
 });
 
 const port = process.env.PORT || 3000;
