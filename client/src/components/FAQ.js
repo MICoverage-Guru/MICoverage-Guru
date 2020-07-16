@@ -13,11 +13,11 @@ class FAQ extends Component {
 			if (!flag1) {
 				flag1 = true;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
 			} else {
 				flag1 = false;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
 			}
 		});
 		var flag2 = false;
@@ -25,11 +25,11 @@ class FAQ extends Component {
 			if (!flag2) {
 				flag2 = true;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
 			} else {
 				flag2 = false;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
 			}
 		});
 		var flag3 = false;
@@ -37,11 +37,11 @@ class FAQ extends Component {
 			if (!flag3) {
 				flag3 = true;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
 			} else {
 				flag3 = false;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
 			}
 		});
 		var flag4 = false;
@@ -49,11 +49,11 @@ class FAQ extends Component {
 			if (!flag4) {
 				flag4 = true;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
 			} else {
 				flag4 = false;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
 			}
 		});
 		var flag5 = false;
@@ -61,11 +61,11 @@ class FAQ extends Component {
 			if (!flag5) {
 				flag5 = true;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
 			} else {
 				flag5 = false;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
 			}
 		});
 		var flag6 = false;
@@ -73,11 +73,11 @@ class FAQ extends Component {
 			if (!flag6) {
 				flag6 = true;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
 			} else {
 				flag6 = false;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
 			}
 		});
 		var flag7 = false;
@@ -85,11 +85,11 @@ class FAQ extends Component {
 			if (!flag7) {
 				flag7 = true;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
 			} else {
 				flag7 = false;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
 			}
 		});
 		var flag8 = false;
@@ -97,11 +97,11 @@ class FAQ extends Component {
 			if (!flag8) {
 				flag8 = true;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
 			} else {
 				flag8 = false;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
 			}
 		});
 		var flag9 = false;
@@ -109,11 +109,11 @@ class FAQ extends Component {
 			if (!flag9) {
 				flag9 = true;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
 			} else {
 				flag9 = false;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
 			}
 		});
 		var flag10 = false;
@@ -121,11 +121,11 @@ class FAQ extends Component {
 			if (!flag10) {
 				flag10 = true;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
 			} else {
 				flag10 = false;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
 			}
 		});
 		var flag11 = false;
@@ -133,11 +133,11 @@ class FAQ extends Component {
 			if (!flag11) {
 				flag11 = true;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
 			} else {
 				flag11 = false;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
 			}
 		});
 
@@ -146,11 +146,11 @@ class FAQ extends Component {
 			if (!flag12) {
 				flag12 = true;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/627df7/collapse-arrow.png" />';
 			} else {
 				flag12 = false;
 				this.childNodes[1].innerHTML =
-					'<img alt="faq_arrow" className="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
+					'<img alt="faq_arrow" class="faq-arrow" src="https://img.icons8.com/metro/26/000000/expand-arrow.png" />';
 			}
 		});
 	}
@@ -181,11 +181,11 @@ class FAQ extends Component {
 									also have No-Fault requirements, Michigan’s No-Fault law is
 									unique in that the PIP coverage provides for unlimited medical
 									benefits for the lifetime of the injured person when those
-									injuries result from an auto accident. On July 2, 2020, many
-									changes to the existing no-fault auto insurance law will take
-									effect, including giving Michigan drivers a choice in their
-									level of PIP coverage. Under the new plan, drivers will be
-									able to choose from up to six options for Personal Injury
+									injuries result from an auto accident. On <b>July 2, 2020</b>,
+									many changes to the existing no-fault auto insurance law will
+									take effect, including giving Michigan drivers a choice in
+									their level of PIP coverage. Under the new plan, drivers will
+									be able to choose from up to six options for Personal Injury
 									Protection coverage.
 								</p>
 							</CollapsibleContent>
@@ -209,7 +209,8 @@ class FAQ extends Component {
 									rehabilitation. It sounded like a great idea at the time — but
 									as health care costs and the frequency of lawsuits continued
 									to rise, it meant that auto insurance costs rose
-									significantly, too. Today, Michigan has the 4th most expensive
+									significantly, too. Today, Michigan has the{" "}
+									<b>most expensive</b>
 									auto insurance in the country Unsurprisingly, it is also
 									ranked 4th in the U.S. with about 20% of drivers uninsured.
 								</p>
@@ -228,8 +229,9 @@ class FAQ extends Component {
 								<p>
 									While some parts of the law are already active, the parts that
 									impact your selection options for PIP coverage go into effect
-									on July 2, 2020. MI Coverage Guru is committed to making the
-									transition easy and saving money for you and your family.
+									on <b>July 2, 2020</b>. MI Coverage Guru is committed to
+									making the transition easy and saving money for you and your
+									family.
 								</p>
 							</CollapsibleContent>
 							<CollapsibleHead className="additionalClassForHead4">
@@ -256,10 +258,11 @@ class FAQ extends Component {
 									insurance. <br /> <br />
 									PIP Coverage Options: <br />
 									<br />
-									1. Unlimited Coverage: Average 10% reduction in premium <br />
-									2. $500,000: Average 20% reduction in premium <br />
-									3. $250,000: Average 35% reduction in premium <br />
-									4. $50,000: Average 45% reduction in premium <br />
+									1. Unlimited Coverage: <b>Average 10% reduction</b> in premium{" "}
+									<br />
+									2. $500,000: <b>Average 20% reduction</b> in premium <br />
+									3. $250,000: <b>Average 35% reduction</b> in premium <br />
+									4. $50,000: <b>Average 45% reduction</b> in premium <br />
 									<br />
 									The good news is that our licensed insurance agents are here
 									to help provide you information and prevent you from

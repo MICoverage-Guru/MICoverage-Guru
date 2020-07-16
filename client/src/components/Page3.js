@@ -4,6 +4,7 @@ import TextQuestion from "./TextQuestion";
 import Question from "./Question";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar } from "react-step-progress-bar";
+import $ from "jquery";
 
 class Page3 extends Component {
 	constructor(props) {
@@ -13,11 +14,14 @@ class Page3 extends Component {
 			nov = JSON.parse(localStorage.getItem("vehicles_data")).length;
 		}
 		this.state = {
-			no_of_vehicles: nov
+			no_of_vehicles: nov,
+			apiToken: "lDnXP2IPNnZ4Ws2V4MO40KQh8x8Bwfc3D2QX4sQsVxlSi8lndwZPNKy3hKvD"
 		};
 		this.addVehicle = this.addVehicle.bind(this);
 		this.submit = this.submit.bind(this);
 		this.deleteVehicle = this.deleteVehicle.bind(this);
+		// this.fetchVehicleYears = this.fetchVehicleYears.bind(this);
+		// this.fetchVehicleMakes = this.fetchVehicleMakes.bind(this);
 	}
 	submit(e) {
 		e.preventDefault();
@@ -44,6 +48,9 @@ class Page3 extends Component {
 			const q9 = document.getElementById(qid_prefix + "9").value;
 			const q10 = document.getElementById(qid_prefix + "10").value;
 			const q13 = document.getElementById(qid_prefix + "13").value;
+			const q13_metric = document.getElementById(qid_prefix + "13-metric")
+				.value;
+			const q13_val = q13 + " " + q13_metric;
 			if (q7 === "") {
 				elem = document.getElementById("v" + i + "-heading");
 				elem.style.color = "#e74c3c";
@@ -93,7 +100,7 @@ class Page3 extends Component {
 					Q10: q10,
 					Q11: q11,
 					Q12: q12,
-					Q13: q13
+					Q13: q13_val
 				};
 				main_array.push(dict);
 				i++;
@@ -109,11 +116,12 @@ class Page3 extends Component {
 		var current_no = this.state.no_of_vehicles;
 		var cn = current_no;
 		this.setState({ no_of_vehicles: current_no + 1 });
+		var cnp1 = cn + 1;
 		setTimeout(function() {
-			var cnp1 = cn + 1;
 			var elmnt = document.getElementById("v" + cnp1);
 			elmnt.scrollIntoView();
 		}, 100);
+		setTimeout(() => this.fetchVehicleYears(cnp1), 5);
 	}
 
 	deleteVehicle(vid) {
@@ -138,6 +146,7 @@ class Page3 extends Component {
 		for (var i = 0; i < this.state.no_of_vehicles; i++) {
 			const j = i + 1;
 			if (j !== 1) {
+				setTimeout(() => this.fetchVehicleYears(j), 5);
 				vehicle_units.push(
 					<div className="vehicle-unit" key={"v" + j}>
 						<div className="vehicle-heading" id={"v" + j}>
@@ -155,28 +164,65 @@ class Page3 extends Component {
 						<br />
 						<br />
 						<br />
-						<TextQuestion
-							qid={"v" + j + "-Q7"}
-							max_chars="4"
-							label="Vehicle year (YYYY)"
-							val={this.existingValue(i, "Q7")}
-						/>
-						<TextQuestion
-							qid={"v" + j + "-Q8"}
-							label="Make (Example: Honda)"
-							val={this.existingValue(i, "Q8")}
-						/>
-						<TextQuestion
-							qid={"v" + j + "-Q9"}
-							label="Model (Example: Civic)"
-							val={this.existingValue(i, "Q9")}
-						/>
-						<TextQuestion
-							qid={"v" + j + "-Q10"}
-							label="Trim (Example: Sport) (Optional)"
-							val={this.existingValue(i, "Q10")}
-							req={false}
-						/>
+						<div className="question-container">
+							<div className="question">
+								<p id={"v" + j + "-Q7-qs"}>Vehicle year</p>
+							</div>
+							<div className="question-options">
+								<select
+									id={"v" + j + "-Q7"}
+									name={"v" + j + "-Q7"}
+									className="input-select"
+									onChange={() => this.fetchVehicleMakes(j)}
+								>
+									<option value="default">Select Year</option>
+								</select>
+							</div>
+						</div>
+						<div className="question-container">
+							<div className="question">
+								<p id={"v" + j + "-Q8-qs"}>Make</p>
+							</div>
+							<div className="question-options">
+								<select
+									id={"v" + j + "-Q8"}
+									name={"v" + j + "-Q8"}
+									className="input-select"
+									onChange={() => this.fetchVehicleModels(j)}
+								>
+									<option value="default">Select Make</option>
+								</select>
+							</div>
+						</div>
+						<div className="question-container">
+							<div className="question">
+								<p id={"v" + j + "-Q9-qs"}>Model</p>
+							</div>
+							<div className="question-options">
+								<select
+									id={"v" + j + "-Q9"}
+									name={"v" + j + "-Q9"}
+									className="input-select"
+									onChange={() => this.fetchVehicleTrims(j)}
+								>
+									<option value="default">Select Model</option>
+								</select>
+							</div>
+						</div>
+						<div className="question-container">
+							<div className="question">
+								<p id={"v" + j + "-Q10-qs"}>Trim (Optional)</p>
+							</div>
+							<div className="question-options">
+								<select
+									id={"v" + j + "-Q10"}
+									name={"v" + j + "-Q10"}
+									className="input-select"
+								>
+									<option value="default">Select Trim</option>
+								</select>
+							</div>
+						</div>
 						<Question
 							question="Do you own or lease this vehicle?"
 							optno="3"
@@ -197,11 +243,29 @@ class Page3 extends Component {
 							val={this.existingValue(i, "Q12")}
 						/>
 						<TextQuestion
-							question="How many miles do you drive (per year)?"
+							question="How many miles do you drive?"
 							sub_question="Most drivers average 11,000 miles per year."
+							label="Miles"
 							qid={"v" + j + "-Q13"}
+							type="number"
 							val={this.existingValue(i, "Q13")}
 						/>
+						<br />
+						<div className="question-container">
+							<div className="question-options">
+								<select
+									id={"v" + j + "-Q13-metric"}
+									name={"v" + j + "-Q13-metric"}
+									className="input-select"
+									defaultValue={this.existingValue(i, "Q13-metric")}
+								>
+									<option value="per year">Per year</option>
+									<option value="per month">Per month</option>
+									<option value="per week">Per week</option>
+									<option value="per day">Per day</option>
+								</select>
+							</div>
+						</div>
 					</div>
 				);
 			} else {
@@ -214,28 +278,65 @@ class Page3 extends Component {
 						<br />
 						<br />
 						<br />
-						<TextQuestion
-							qid={"v" + j + "-Q7"}
-							label="Vehicle year (YYYY)"
-							max_chars="4"
-							val={this.existingValue(i, "Q7")}
-						/>
-						<TextQuestion
-							qid={"v" + j + "-Q8"}
-							label="Make (Example: Honda)"
-							val={this.existingValue(i, "Q8")}
-						/>
-						<TextQuestion
-							qid={"v" + j + "-Q9"}
-							label="Model (Example: Civic)"
-							val={this.existingValue(i, "Q9")}
-						/>
-						<TextQuestion
-							qid={"v" + j + "-Q10"}
-							label="Trim (Example: Sport) (Optional)"
-							val={this.existingValue(i, "Q10")}
-							req={false}
-						/>
+						<div className="question-container">
+							<div className="question">
+								<p id={"v" + j + "-Q7-qs"}>Vehicle year</p>
+							</div>
+							<div className="question-options">
+								<select
+									id={"v" + j + "-Q7"}
+									name={"v" + j + "-Q7"}
+									className="input-select"
+									onInput={() => this.fetchVehicleMakes(j)}
+								>
+									<option value="default">Select Year</option>
+								</select>
+							</div>
+						</div>
+						<div className="question-container">
+							<div className="question">
+								<p id={"v" + j + "-Q8-qs"}>Make</p>
+							</div>
+							<div className="question-options">
+								<select
+									id={"v" + j + "-Q8"}
+									name={"v" + j + "-Q8"}
+									className="input-select"
+									onChange={() => this.fetchVehicleModels(j)}
+								>
+									<option value="default">Select Make</option>
+								</select>
+							</div>
+						</div>
+						<div className="question-container">
+							<div className="question">
+								<p id={"v" + j + "-Q9-qs"}>Model</p>
+							</div>
+							<div className="question-options">
+								<select
+									id={"v" + j + "-Q9"}
+									name={"v" + j + "-Q9"}
+									className="input-select"
+									onChange={() => this.fetchVehicleTrims(j)}
+								>
+									<option value="default">Select Model</option>
+								</select>
+							</div>
+						</div>
+						<div className="question-container">
+							<div className="question">
+								<p id={"v" + j + "-Q10-qs"}>Trim (Optional)</p>
+							</div>
+							<div className="question-options">
+								<select
+									id={"v" + j + "-Q10"}
+									name={"v" + j + "-Q10"}
+									className="input-select"
+								>
+									<option value="default">Select Trim</option>
+								</select>
+							</div>
+						</div>
 						<Question
 							question="Do you own or lease this vehicle?"
 							optno="3"
@@ -256,12 +357,29 @@ class Page3 extends Component {
 							val={this.existingValue(i, "Q12")}
 						/>
 						<TextQuestion
-							question="How many miles do you drive (per year)?"
+							question="How many miles do you drive?"
 							sub_question="Most drivers average 11,000 miles per year."
 							label="Miles"
 							qid={"v" + j + "-Q13"}
+							type="number"
 							val={this.existingValue(i, "Q13")}
 						/>
+						<br />
+						<div className="question-container">
+							<div className="question-options">
+								<select
+									id={"v" + j + "-Q13-metric"}
+									name={"v" + j + "-Q13-metric"}
+									className="input-select"
+									defaultValue={this.existingValue(i, "Q13-metric")}
+								>
+									<option value="per year">Per year</option>
+									<option value="per month">Per month</option>
+									<option value="per week">Per week</option>
+									<option value="per day">Per day</option>
+								</select>
+							</div>
+						</div>
 					</div>
 				);
 			}
@@ -275,12 +393,226 @@ class Page3 extends Component {
 		}
 	}
 
+	componentDidMount() {
+		setTimeout(() => this.fetchVehicleYears(1), 50);
+	}
+
+	fetchVehicleYears = k => {
+		var years_elems = document.getElementById("v" + k + "-Q7");
+		years_elems.innerHTML = "<option value='default'>Select Year</option>";
+		$.get(
+			"https://carmakemodeldb.com/api/v1/car-lists/get/years/desc" +
+				"?api_token=" +
+				this.state.apiToken,
+			data => {
+				$.each(data, (index, element) => {
+					var v_index = k - 1;
+					if (
+						localStorage.getItem("vehicles_data") &&
+						JSON.parse(localStorage.getItem("vehicles_data"))[v_index]
+					) {
+						if (
+							element.year ===
+							JSON.parse(localStorage.getItem("vehicles_data"))[v_index]["Q7"]
+						) {
+							years_elems.innerHTML +=
+								"<option value='" +
+								element.year +
+								"' selected>" +
+								element.year +
+								"</option>";
+							setTimeout(() => this.fetchVehicleMakes(k), 1);
+						} else {
+							years_elems.innerHTML +=
+								"<option value='" +
+								element.year +
+								"'>" +
+								element.year +
+								"</option>";
+						}
+					} else {
+						years_elems.innerHTML +=
+							"<option value='" +
+							element.year +
+							"'>" +
+							element.year +
+							"</option>";
+					}
+				});
+			}
+		);
+	};
+
+	fetchVehicleMakes = k => {
+		var vehicle_year = document.getElementById("v" + k + "-Q7").value;
+		var makes_elems = document.getElementById("v" + k + "-Q8");
+		makes_elems.innerHTML = "<option value='default'>Select Make</option>";
+		$.get(
+			"https://carmakemodeldb.com/api/v1/car-lists/get/makes/" +
+				vehicle_year +
+				"?api_token=" +
+				this.state.apiToken,
+			data => {
+				$.each(data, (index, element) => {
+					var v_index = k - 1;
+					if (
+						localStorage.getItem("vehicles_data") &&
+						JSON.parse(localStorage.getItem("vehicles_data"))[v_index]
+					) {
+						if (
+							element.make ===
+							JSON.parse(localStorage.getItem("vehicles_data"))[v_index]["Q8"]
+						) {
+							makes_elems.innerHTML +=
+								"<option value='" +
+								element.make +
+								"' selected>" +
+								element.make +
+								"</option>";
+							this.fetchVehicleModels(k);
+						} else {
+							makes_elems.innerHTML +=
+								"<option value='" +
+								element.make +
+								"'>" +
+								element.make +
+								"</option>";
+						}
+					} else {
+						makes_elems.innerHTML +=
+							"<option value='" +
+							element.make +
+							"'>" +
+							element.make +
+							"</option>";
+					}
+				});
+			}
+		);
+	};
+
+	fetchVehicleModels = k => {
+		var vehicle_year = document.getElementById("v" + k + "-Q7").value;
+		var vehicle_make = document.getElementById("v" + k + "-Q8").value;
+		var models_elems = document.getElementById("v" + k + "-Q9");
+		models_elems.innerHTML = "<option value='default'>Select Model</option>";
+		$.get(
+			"https://carmakemodeldb.com/api/v1/car-lists/get/models/" +
+				vehicle_year +
+				"/" +
+				vehicle_make +
+				"?api_token=" +
+				this.state.apiToken,
+			data => {
+				$.each(data, (index, element) => {
+					var v_index = k - 1;
+					if (
+						localStorage.getItem("vehicles_data") &&
+						JSON.parse(localStorage.getItem("vehicles_data"))[v_index]
+					) {
+						if (
+							element.model ===
+							JSON.parse(localStorage.getItem("vehicles_data"))[v_index]["Q9"]
+						) {
+							models_elems.innerHTML +=
+								"<option value='" +
+								element.model +
+								"' selected>" +
+								element.model +
+								"</option>";
+							setTimeout(() => this.fetchVehicleTrims(k), 1);
+						} else {
+							models_elems.innerHTML +=
+								"<option value='" +
+								element.model +
+								"'>" +
+								element.model +
+								"</option>";
+						}
+					} else {
+						models_elems.innerHTML +=
+							"<option value='" +
+							element.model +
+							"'>" +
+							element.model +
+							"</option>";
+					}
+				});
+			}
+		);
+	};
+
+	fetchVehicleTrims = k => {
+		var vehicle_year = document.getElementById("v" + k + "-Q7").value;
+		var vehicle_make = document.getElementById("v" + k + "-Q8").value;
+		var vehicle_model = document.getElementById("v" + k + "-Q9").value;
+		var trims_elems = document.getElementById("v" + k + "-Q10");
+		trims_elems.innerHTML = "<option value='default'>Select Trim</option>";
+		$.get(
+			"https://carmakemodeldb.com/api/v1/car-lists/get/trims/" +
+				vehicle_year +
+				"/" +
+				vehicle_make +
+				"/" +
+				vehicle_model +
+				"?api_token=" +
+				this.state.apiToken,
+			data => {
+				$.each(data, (index, element) => {
+					var v_index = k - 1;
+					if (
+						localStorage.getItem("vehicles_data") &&
+						JSON.parse(localStorage.getItem("vehicles_data"))[v_index]
+					) {
+						if (
+							element.trim ===
+							JSON.parse(localStorage.getItem("vehicles_data"))[v_index]["Q10"]
+						) {
+							trims_elems.innerHTML +=
+								"<option value='" +
+								element.trim +
+								"' selected>" +
+								element.trim +
+								"</option>";
+							// setTimeout(() => this.fetchVehicleTrims(k), 1);
+						} else {
+							trims_elems.innerHTML +=
+								"<option value='" +
+								element.trim +
+								"'>" +
+								element.trim +
+								"</option>";
+						}
+					} else {
+						trims_elems.innerHTML +=
+							"<option value='" +
+							element.trim +
+							"'>" +
+							element.trim +
+							"</option>";
+					}
+				});
+			}
+		);
+	};
+
 	existingValue(dict_id, qid) {
 		if (
 			localStorage.getItem("vehicles_data") &&
 			JSON.parse(localStorage.getItem("vehicles_data"))[dict_id]
 		) {
-			return JSON.parse(localStorage.getItem("vehicles_data"))[dict_id][qid];
+			if (qid === "Q13") {
+				return JSON.parse(localStorage.getItem("vehicles_data"))[dict_id][
+					qid
+				].split(" ")[0];
+			} else if (qid === "Q13-metric") {
+				return JSON.parse(localStorage.getItem("vehicles_data"))
+					[dict_id]["Q13"].split(" ")
+					.splice(1, 2)
+					.join(" ");
+			} else {
+				return JSON.parse(localStorage.getItem("vehicles_data"))[dict_id][qid];
+			}
 		} else {
 			return "";
 		}

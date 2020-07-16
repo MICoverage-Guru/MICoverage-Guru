@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Navbar from "./Navbar";
-import TextQuestion from "./TextQuestion";
 import Question from "./Question";
+import TextQuestion from "./TextQuestion";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar } from "react-step-progress-bar";
 import Swal from "sweetalert2";
@@ -11,6 +11,10 @@ import "cleave.js/dist/addons/cleave-phone.us";
 class Page4 extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			dealership: 0,
+			insured: 0
+		};
 		this.submit = this.submit.bind(this);
 	}
 	submit(e) {
@@ -32,7 +36,7 @@ class Page4 extends Component {
 		}
 
 		let elem;
-		const q25 = document.getElementById("Q25").value;
+		const q6 = document.getElementById("Q6").value;
 		const q27 = document.getElementById("Q27").value;
 		if (!document.querySelector("input[name=Q14]:checked")) {
 			elem = document.getElementById("Q14-qs");
@@ -54,8 +58,8 @@ class Page4 extends Component {
 			elem.style.color = "#e74c3c";
 			elem.scrollIntoView();
 			submitFlag = false;
-		} else if (q25 === "") {
-			elem = document.getElementById("Q25-qs");
+		} else if (q6 === "") {
+			elem = document.getElementById("Q6-qs");
 			elem.style.color = "#e74c3c";
 			elem.scrollIntoView();
 			submitFlag = false;
@@ -69,7 +73,18 @@ class Page4 extends Component {
 			elem.style.color = "#e74c3c";
 			elem.scrollIntoView();
 			submitFlag = false;
-		} else if (document.getElementsByName("Q19").length !== 0) {
+		}
+
+		if (this.state.dealership === 1) {
+			if (document.getElementById("Q28").value === "") {
+				elem = document.getElementById("Q28-qs");
+				elem.style.color = "#e74c3c";
+				elem.scrollIntoView();
+				submitFlag = false;
+			}
+		}
+
+		if (this.state.insured === 1) {
 			const q19 = document.getElementById("Q19").value;
 			if (q19 === "default") {
 				elem = document.getElementById("Q19-qs");
@@ -92,9 +107,12 @@ class Page4 extends Component {
 			if (document.getElementsByName("Q19").length !== 0) {
 				localStorage.setItem("Q19", document.getElementById("Q19").value);
 			}
-			localStorage.setItem("Q25", q25);
+			localStorage.setItem("Q6", q6);
 			localStorage.setItem("Q26", q26);
 			localStorage.setItem("Q27", q27);
+			if (this.state.dealership) {
+				localStorage.setItem("Q28", document.getElementById("Q28").value);
+			}
 			Toast.fire({
 				icon: "info",
 				title: "Submitting responses..."
@@ -120,6 +138,18 @@ class Page4 extends Component {
 		}
 	}
 
+	componentDidMount() {
+		var isInsured = localStorage.getItem("Q1") === "Yes" ? true : false;
+		if (isInsured) {
+			this.setState({ insured: 1 });
+		}
+		var isDealership =
+			localStorage.getItem("Q26") === "Dealership" ? true : false;
+		if (isDealership) {
+			this.setState({ dealership: 1 });
+		}
+	}
+
 	existingValue(qid) {
 		if (localStorage.getItem(qid)) {
 			return localStorage.getItem(qid);
@@ -128,13 +158,22 @@ class Page4 extends Component {
 		}
 	}
 
+	showDealershipInput = () => {
+		let input_value = document.querySelector("input[name=Q26]:checked").value;
+		if (input_value === "Dealership") {
+			this.setState({ dealership: 1 });
+		} else {
+			this.setState({ dealership: 0 });
+		}
+	};
+
 	back() {
 		window.location.href = "/form/3";
 	}
 
 	render() {
 		var has_insurance = localStorage.getItem("Q1") === "Yes" ? true : false;
-		var insurance_questions;
+		var insurance_questions, dealership_question;
 		if (has_insurance) {
 			insurance_questions = (
 				<>
@@ -145,6 +184,9 @@ class Page4 extends Component {
 						<div className="question-options">
 							<select id="Q19" name="Q19" className="input-select" type="text">
 								<option value="default">Select Provider</option>
+								<option value="I’d prefer not to say">
+									I’d prefer not to say
+								</option>
 								<option value="21st Century">21st Century</option>
 								<option value="AAA">AAA</option>
 								<option value="AARP">AARP</option>
@@ -207,6 +249,15 @@ class Page4 extends Component {
 				</>
 			);
 		}
+		if (this.state.dealership === 1) {
+			dealership_question = (
+				<TextQuestion
+					question="Name of dealership/agent"
+					qid="Q28"
+					type="text"
+				/>
+			);
+		}
 		return (
 			<div className="container">
 				<Navbar />
@@ -245,7 +296,7 @@ class Page4 extends Component {
 								opt2="Good (680-719)"
 								opt3="Average (580-679)"
 								opt4="Poor (Below 580)"
-								opt5="Not sure"
+								opt5="I’d prefer not to say"
 								qid="Q16"
 								val={this.existingValue("Q16")}
 							/>
@@ -261,13 +312,25 @@ class Page4 extends Component {
 								val={this.existingValue("Q17")}
 							/>
 							{insurance_questions}
-							<TextQuestion
-								question="Where can we send you a copy of your quotes?"
-								sub_question="We never, ever sell your info to third parties - we hate spam, too."
-								qid="Q25"
-								val={this.existingValue("Q25")}
-								label="Email ID"
-							/>
+							<div className="question-container" style={{ marginTop: "4vh" }}>
+								<div className="question">
+									<p id="Q6-qs">Date of Birth</p>
+								</div>
+								<Cleave
+									placeholder="MM/DD/YYYY"
+									options={{
+										numericOnly: true,
+										date: true,
+										delimiter: "/",
+										datePattern: ["m", "d", "Y"]
+									}}
+									className="input inner"
+									id="Q6"
+									pattern="\d{2}/\d{2}/\d{4}"
+									title="Please enter a valid date of birth."
+									value={this.existingValue("Q6")}
+								/>
+							</div>
 							<div className="question-container" style={{ marginTop: "3vh" }}>
 								<div className="question">
 									<p id="Q27-qs">Phone Number</p>
@@ -279,26 +342,31 @@ class Page4 extends Component {
 								<Cleave
 									options={{
 										numericOnly: true,
-										blocks: [0, 3, 0, 0, 3, 0, 4],
-										delimiters: ["(", ")", "-", "(", ")", "-", "-"]
+										blocks: [0, 3, 0, 3, 4],
+										delimiters: ["(", ")", "-"]
 									}}
 									className="input inner"
 									id="Q27"
+									pattern=".{14}"
+									title="Please enter a valid phone number."
 									value={this.existingValue("Q27")}
 								/>
 							</div>
 							<Question
 								question="How did you hear about us?"
-								optno="6"
+								optno="7"
 								opt1="Facebook"
 								opt2="Google"
 								opt3="Twitter"
 								opt4="Instagram"
 								opt5="Print Media"
-								opt6="Other"
+								opt6="Dealership"
+								opt7="Other"
 								qid="Q26"
+								onClick={this.showDealershipInput}
 								val={this.existingValue("Q26")}
 							/>
+							{dealership_question}
 						</div>
 						<div className="next-page" onClick={this.back}>
 							&larr; Go Back

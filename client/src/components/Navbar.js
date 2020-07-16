@@ -29,6 +29,7 @@ class Navbar extends Component {
 				'<textarea rows="10" cols="5" id="swal-input4" class="swal2-input" style="height:7em; padding-top: 0.5em;" placeholder="Question (Optional)" />',
 			focusConfirm: false,
 			confirmButtonText: "SEND",
+			showCloseButton: true,
 			preConfirm: () => {
 				return [
 					document.getElementById("swal-input1").value,
@@ -79,7 +80,7 @@ class Navbar extends Component {
 				<div className="nav-contents">
 					<div
 						className="responsive-phone"
-						onClick={() => this.toLink("tel:5555551234")}
+						onClick={() => this.toLink("tel:+1 (833)-642-6837")}
 					>
 						<img
 							alt="call icon"
@@ -90,19 +91,19 @@ class Navbar extends Component {
 						<img alt="main_logo" src={logo} onClick={this.goHome} />
 					</div>
 					<div className="links">
-						<p onClick={() => this.toLink("/#faq")}>FAQ & Media</p>
+						<p onClick={() => this.toLink("/#media-container")}>FAQ & Media</p>
 						<p id="last-link" onClick={this.showContact}>
 							Contact us
 						</p>
 						<div
 							className="phone-box"
-							onClick={() => this.toLink("tel:5555551234")}
+							onClick={() => this.toLink("tel:+1 (833)-642-6837")}
 						>
 							<img
 								alt="call icon"
 								src="https://img.icons8.com/material-outlined/48/000000/call-male.png"
 							/>{" "}
-							(555) 555-1234
+							+1 (833)-642-6837
 						</div>
 					</div>
 					<div className="responsive-nav">
@@ -115,18 +116,8 @@ class Navbar extends Component {
 					<div className="clear" />
 				</div>
 				<div className="responsive-links">
-					<p onClick={() => this.toLink("/#faq")}>FAQ & Media</p>
+					<p onClick={() => this.toLink("/#media-container")}>FAQ & Media</p>
 					<p onClick={this.showContact}>Contact us</p>
-					<div
-						className="phone-box"
-						onClick={() => this.toLink("tel:5555551234")}
-					>
-						<img
-							alt="call icon"
-							src="https://img.icons8.com/material-outlined/48/000000/call-male.png"
-						/>{" "}
-						(555) 555-1234
-					</div>
 				</div>
 			</div>
 		);

@@ -17,20 +17,28 @@ class Media extends Component {
 		}
 	}
 	render() {
+		const divStyle = src => ({
+			background: "url(" + src + ")"
+		});
 		const articles = mediaData.map(function(article) {
 			return (
 				<div className="media-block" key={article.article_id}>
-					<img alt="media_image" src={article.image} />
+					{/* <img alt="media_image" src={article.image} /> */}
+					<div id="media-img" style={divStyle(article.image)}></div>
 					<h1>{article.title}</h1>
 					<p>{article.text}</p>
 					<a target="_blank" rel="noopener noreferrer" href={article.link}>
 						Read More &rarr;
 					</a>
+					<br />
+					<p className="media-source">
+						{article.link.split("/")[2].replace("www.", "")}
+					</p>
 				</div>
 			);
 		});
 		return (
-			<div className="media-container">
+			<div className="media-container" id="media-container">
 				<div className="media-section">
 					<br />
 					<h1>Media</h1>

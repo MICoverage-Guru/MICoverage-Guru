@@ -5,6 +5,7 @@ var app = express();
 var cors = require("cors");
 var path = require("path");
 var unix_timestamp = require("unix-timestamp");
+var serveStatic = require("serve-static");
 const sgMail = require("@sendgrid/mail");
 const http = require("http");
 var server = http.createServer(app);
@@ -15,6 +16,19 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.static(path.join(__dirname, "build")));
+app.use(
+	serveStatic(path.join(__dirname, "build"), {
+		maxAge: "1d",
+		setHeaders: setCustomCacheControl
+	})
+);
+
+function setCustomCacheControl(res, path) {
+	if (serveStatic.mime.lookup(path) === "text/html") {
+		// Custom Cache-Control for HTML files
+		res.setHeader("Cache-Control", "public, max-age=0");
+	}
+}
 
 sgMail.setApiKey(
 	"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"
@@ -47,6 +61,7 @@ app.get("/*", (req, res) => {
 
 app.post("/api/submitInsuranceRequest", function(req, res) {
 	let isInsured = false;
+	let isDealership = false;
 	var user_data;
 	let insuranceType_formatted;
 	if (req.body.insurance_type == "auto_home")
@@ -56,46 +71,99 @@ app.post("/api/submitInsuranceRequest", function(req, res) {
 
 	if (req.body.Q1 === "Yes") {
 		isInsured = true;
-		user_data = {
-			zipCode: req.body.zip_code,
-			insuranceType: insuranceType_formatted,
-			Q1: req.body.Q1,
-			Q2: req.body.Q2,
-			Q3: req.body.Q3,
-			Q4: req.body.Q4,
-			Q5: req.body.Q5,
-			Q6: req.body.Q6,
-			vehicle_object: JSON.parse(req.body.vehicles_data),
-			Q14: req.body.Q14,
-			Q15: req.body.Q15,
-			Q16: req.body.Q16,
-			Q17: req.body.Q17,
-			insured: isInsured,
-			Q19: req.body.Q19,
-			Q25: req.body.Q25,
-			Q26: req.body.Q26,
-			Q27: req.body.Q27
-		};
+		if (req.body.Q26 === "Dealership") {
+			isDealership = true;
+			user_data = {
+				zipCode: req.body.zip_code,
+				insuranceType: insuranceType_formatted,
+				Q1: req.body.Q1,
+				Q2: req.body.Q2,
+				Q3: req.body.Q3,
+				Q4: req.body.Q4,
+				Q5: req.body.Q5,
+				Q6: req.body.Q6,
+				vehicle_object: JSON.parse(req.body.vehicles_data),
+				Q14: req.body.Q14,
+				Q15: req.body.Q15,
+				Q16: req.body.Q16,
+				Q17: req.body.Q17,
+				insured: isInsured,
+				Q19: req.body.Q19,
+				Q25: req.body.Q25,
+				Q26: req.body.Q26,
+				Q27: req.body.Q27,
+				dealership: isDealership,
+				Q28: req.body.Q28
+			};
+		} else {
+			user_data = {
+				zipCode: req.body.zip_code,
+				insuranceType: insuranceType_formatted,
+				Q1: req.body.Q1,
+				Q2: req.body.Q2,
+				Q3: req.body.Q3,
+				Q4: req.body.Q4,
+				Q5: req.body.Q5,
+				Q6: req.body.Q6,
+				vehicle_object: JSON.parse(req.body.vehicles_data),
+				Q14: req.body.Q14,
+				Q15: req.body.Q15,
+				Q16: req.body.Q16,
+				Q17: req.body.Q17,
+				insured: isInsured,
+				Q19: req.body.Q19,
+				Q25: req.body.Q25,
+				Q26: req.body.Q26,
+				Q27: req.body.Q27,
+				dealership: isDealership
+			};
+		}
 	} else {
-		user_data = {
-			zipCode: req.body.zip_code,
-			insuranceType: insuranceType_formatted,
-			Q1: req.body.Q1,
-			Q2: req.body.Q2,
-			Q3: req.body.Q3,
-			Q4: req.body.Q4,
-			Q5: req.body.Q5,
-			Q6: req.body.Q6,
-			vehicle_object: JSON.parse(req.body.vehicles_data),
-			Q14: req.body.Q14,
-			Q15: req.body.Q15,
-			Q16: req.body.Q16,
-			Q17: req.body.Q17,
-			insured: isInsured,
-			Q25: req.body.Q25,
-			Q26: req.body.Q26,
-			Q27: req.body.Q27
-		};
+		if (req.body.Q26 === "Dealership") {
+			isDealership = true;
+			user_data = {
+				zipCode: req.body.zip_code,
+				insuranceType: insuranceType_formatted,
+				Q1: req.body.Q1,
+				Q2: req.body.Q2,
+				Q3: req.body.Q3,
+				Q4: req.body.Q4,
+				Q5: req.body.Q5,
+				Q6: req.body.Q6,
+				vehicle_object: JSON.parse(req.body.vehicles_data),
+				Q14: req.body.Q14,
+				Q15: req.body.Q15,
+				Q16: req.body.Q16,
+				Q17: req.body.Q17,
+				insured: isInsured,
+				Q25: req.body.Q25,
+				Q26: req.body.Q26,
+				Q27: req.body.Q27,
+				dealership: isDealership,
+				Q28: req.body.Q28
+			};
+		} else {
+			user_data = {
+				zipCode: req.body.zip_code,
+				insuranceType: insuranceType_formatted,
+				Q1: req.body.Q1,
+				Q2: req.body.Q2,
+				Q3: req.body.Q3,
+				Q4: req.body.Q4,
+				Q5: req.body.Q5,
+				Q6: req.body.Q6,
+				vehicle_object: JSON.parse(req.body.vehicles_data),
+				Q14: req.body.Q14,
+				Q15: req.body.Q15,
+				Q16: req.body.Q16,
+				Q17: req.body.Q17,
+				insured: isInsured,
+				Q25: req.body.Q25,
+				Q26: req.body.Q26,
+				Q27: req.body.Q27,
+				dealership: isDealership
+			};
+		}
 	}
 	var msg = {
 		to: "autoleadsdemo@gmail.com",
@@ -283,24 +351,28 @@ app.post("/api/getUserRecords", function(req, res) {
 		.ref("/")
 		.child("UserDetails");
 	user_db.on("value", snapshot => {
-		let objs = Object.values(snapshot.val());
-		let toPushArray = [];
-		for (var i = 0; i < objs.length; i++) {
-			let obj = objs[i];
-			let toPushObj = {
-				fname: obj.Q4,
-				lname: obj.Q5,
-				email: obj.Q25,
-				phone: obj.Q27,
-				apptPref: obj.appointmentPref
-					? obj.appointmentPref === "now"
-						? obj.appointmentPref
-						: obj.appointmentPref.split("T").join(" ")
-					: "didn't select"
-			};
-			toPushArray.push(toPushObj);
+		if (snapshot.exists()) {
+			let objs = Object.values(snapshot.val());
+			let toPushArray = [];
+			for (var i = 0; i < objs.length; i++) {
+				let obj = objs[i];
+				let toPushObj = {
+					fname: obj.Q4,
+					lname: obj.Q5,
+					email: obj.Q25,
+					phone: obj.Q27,
+					apptPref: obj.appointmentPref
+						? obj.appointmentPref === "now"
+							? obj.appointmentPref
+							: obj.appointmentPref.split("T").join(" ")
+						: "didn't select"
+				};
+				toPushArray.push(toPushObj);
+			}
+			res.send(toPushArray);
+		} else {
+			res.send();
 		}
-		res.send(toPushArray);
 	});
 });
 

@@ -93,7 +93,13 @@ class Complete extends Component {
 						title: "Appointment Scheduled!"
 					});
 					document.getElementById("sched-appt").style.display = "none";
+					document.getElementById("success-msg").innerHTML =
+						"Our expert agents will get in touch with you soon!";
 					document.getElementById("refer-btn").style.display = "block";
+					window.scroll({
+						top: 0,
+						behavior: "smooth"
+					});
 				}
 			});
 	}
@@ -126,7 +132,13 @@ class Complete extends Component {
 						title: "Appointment Scheduled!"
 					});
 					document.getElementById("sched-appt").style.display = "none";
+					document.getElementById("success-msg").innerHTML =
+						"Our expert agents will get in touch with you soon!";
 					document.getElementById("refer-btn").style.display = "block";
+					window.scroll({
+						top: 0,
+						behavior: "smooth"
+					});
 				}
 			});
 	}
@@ -152,6 +164,7 @@ class Complete extends Component {
 				'<input id="swal-input7" type="text" class="swal2-input" placeholder="Phone Number (Optional)">',
 			focusConfirm: false,
 			confirmButtonText: "SUBMIT",
+			showCloseButton: true,
 			preConfirm: () => {
 				return [
 					document.getElementById("swal-input5").value,
@@ -232,14 +245,14 @@ class Complete extends Component {
 					</svg>
 
 					<h1 className="success">Thanks for requesting a quote!</h1>
-					<p className="success-msg">
-						Our agents are reviewing your information to create fair and
-						reliable insurance quotes.
+					<p className="success-msg" id="success-msg">
+						Our agents are reviewing your information and will contact you with
+						fair and reliable insurance quotes.
 					</p>
 					<div className="post-form-options vertical-flex" id="sched-appt">
 						<div className="appointment-btns">
 							<div className="connect" onClick={() => this.scheduleAppt("now")}>
-								Connect to a licensed agent now
+								Talk to a licensed agent now
 							</div>
 							<div className="connect" onClick={this.openModal}>
 								Schedule an appointment

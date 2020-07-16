@@ -27,18 +27,27 @@ class Home extends Component {
 
 	getStarted = e => {
 		e.preventDefault();
-		localStorage.setItem("zip_code", document.getElementById("zip").value);
-		if (window.innerHeight < 690)
-			document.getElementsByClassName("extra-space")[0].style.paddingBottom =
-				"20vh";
-		else
-			document.getElementsByClassName("extra-space")[0].style.paddingBottom =
-				"10vh";
-		document.getElementsByClassName("landing-home")[0].style.display = "none";
-		document.getElementsByClassName("question-form")[0].style.display = "flex";
-		setTimeout(function() {
-			document.getElementsByClassName("question-form")[0].style.opacity = 1;
-		}, 100);
+		if (!isNaN(document.getElementById("zip").value)) {
+			localStorage.setItem("zip_code", document.getElementById("zip").value);
+			if (window.innerHeight < 690)
+				document.getElementsByClassName("extra-space")[0].style.paddingBottom =
+					"20vh";
+			else
+				document.getElementsByClassName("extra-space")[0].style.paddingBottom =
+					"10vh";
+			document.getElementsByClassName("landing-home")[0].style.display = "none";
+			document.getElementsByClassName("question-form")[0].style.display =
+				"flex";
+			setTimeout(function() {
+				document.getElementsByClassName("question-form")[0].style.opacity = 1;
+			}, 100);
+			window.scroll({
+				top: 0,
+				behavior: "smooth"
+			});
+		} else {
+			alert("Please enter a valid zip code!");
+		}
 	};
 
 	submitForm(insurance) {
@@ -59,8 +68,9 @@ class Home extends Component {
 	componentDidMount() {
 		var text = [
 			"Michigan residents pay <span>100% more</span> for car insurance than the rest of the U.S.",
-			"Get the cheapest <span>auto</span> and <span>home</span> insurance in Michigan!",
-			"Save upto <span>$1000</span> on auto insurance due to the new auto reform in Michigan."
+			"Get the most affordable <span>auto</span> and <span>home</span> insurance in Michigan!",
+			"Right now is the best time to <span>switch insurance</span> in Michigan.",
+			"Save up to <span>$1000</span> on auto insurance due to the new insurance reform in Michigan."
 		];
 		var counter = 0;
 		var elem = $("#greeting");
@@ -86,18 +96,19 @@ class Home extends Component {
 						<div className="left-home">
 							<div className="fixed-height">
 								<h1 id="greeting">
-									Save upto <span>$1000</span> on auto insurance due to the new
-									auto reform in Michigan.
+									Save up to <span>$1000</span> on auto insurance due to the new
+									insurance reform in Michigan.
 								</h1>
 							</div>
 							<form onSubmit={this.getStarted}>
 								<div className="zip-container">
 									<input
-										type="text"
+										type="tel"
 										className="input"
 										placeholder="ZIP CODE"
 										name="zip"
 										id="zip"
+										maxLength="5"
 										required
 									/>
 									<input
@@ -118,9 +129,56 @@ class Home extends Component {
 							<ModalVideo
 								channel="youtube"
 								isOpen={this.state.isOpen}
-								videoId="lySClSGrp-8"
+								videoId="oMntOnJK7s8"
+								allowFullScreen={true}
 								onClose={() => this.setState({ isOpen: false })}
 							/>
+							{/* <div className="home-info">
+								<a
+									className="span-width"
+									data-for="custom-color-no-arrow"
+									data-tip="Michiganders have been overpaying for auto insurance: 100% more than the national average. Due to a state-wide policy reform on July 2nd, 2020, every resident is eligible for savings of 30-50% on their auto insurance. For the first time since 1972, you can decide your medical coverage amount in the case of an accident."
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										x="0px"
+										y="0px"
+										width="43"
+										height="43"
+										viewBox="0 0 172 172"
+										style={{ fill: "#000000" }}
+									>
+										<g
+											fill="none"
+											fill-rule="nonzero"
+											stroke="none"
+											stroke-width="1"
+											stroke-linecap="butt"
+											stroke-linejoin="miter"
+											stroke-miterlimit="10"
+											stroke-dasharray=""
+											stroke-dashoffset="0"
+											font-family="none"
+											font-weight="none"
+											font-size="none"
+											text-anchor="none"
+											style={{ mixBlendMode: "normal" }}
+										>
+											<path d="M0,172v-172h172v172z" fill="none"></path>
+											<g fill="#282c34">
+												<path d="M137.6,22.93333h-103.2c-6.33533,0 -11.46667,5.13133 -11.46667,11.46667v103.2c0,6.33533 5.13133,11.46667 11.46667,11.46667h103.2c6.33533,0 11.46667,-5.13133 11.46667,-11.46667v-103.2c0,-6.33533 -5.13133,-11.46667 -11.46667,-11.46667zM91.73333,120.4h-11.46667v-40.13333h11.46667zM86,65.93333c-4.7472,0 -8.6,-3.8528 -8.6,-8.6c0,-4.7472 3.8528,-8.6 8.6,-8.6c4.7472,0 8.6,3.8528 8.6,8.6c0,4.7472 -3.8528,8.6 -8.6,8.6z"></path>
+											</g>
+										</g>
+									</svg>
+								</a>
+								<ReactTooltip
+									id="custom-color-no-arrow"
+									className="custom-color-no-arrow"
+									textColor="#282c34"
+									backgroundColor="#fafafa"
+									effect="solid"
+								/> 
+							</div>*/}
 						</div>
 						<div className="right-home">
 							<img alt="illustration" src={auto_illustration} />
@@ -168,7 +226,7 @@ class Home extends Component {
 										</g>
 									</g>
 								</svg>
-								<p>Auto & Home Insurance</p>
+								<p>Auto + Home Insurance</p>
 								<p className="insurance_description">
 									People save 20% on average by bundling auto & home insurance
 								</p>
@@ -220,8 +278,8 @@ class Home extends Component {
 				<Partners />
 				<HowItWorks />
 				<WhyUs />
-				<FAQ />
 				<Media />
+				<FAQ />
 				<SubscribeSection />
 				<Footer />
 			</div>

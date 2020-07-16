@@ -4,7 +4,7 @@ import TextQuestion from "./TextQuestion";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar } from "react-step-progress-bar";
 import GooglePlacesAutocomplete from "react-google-places-autocomplete";
-import Cleave from "cleave.js/react";
+// import Cleave from "cleave.js/react";
 
 class Page2 extends Component {
 	submit(e) {
@@ -15,7 +15,8 @@ class Page2 extends Component {
 		const address = "Unit: " + unit + "; " + q3;
 		const q4 = document.getElementById("Q4").value;
 		const q5 = document.getElementById("Q5").value;
-		const q6 = document.getElementById("Q6").value;
+
+		const q25 = document.getElementById("Q25").value;
 
 		let elementArray = document.getElementsByClassName("question");
 
@@ -36,15 +37,15 @@ class Page2 extends Component {
 			elem = document.getElementById("Q4-qs");
 			elem.style.color = "#e74c3c";
 			elem.scrollIntoView();
-		} else if (q6 === "") {
-			elem = document.getElementById("Q4-qs");
+		} else if (q25 === "") {
+			elem = document.getElementById("Q25-qs");
 			elem.style.color = "#e74c3c";
 			elem.scrollIntoView();
 		} else {
 			localStorage.setItem("Q3", address);
 			localStorage.setItem("Q4", q4);
 			localStorage.setItem("Q5", q5);
-			localStorage.setItem("Q6", q6);
+			localStorage.setItem("Q25", q25);
 			window.location.href = "/form/3";
 		}
 	}
@@ -117,32 +118,30 @@ class Page2 extends Component {
 								qid="unit"
 								label="Unit# (Optional)"
 								val={this.existingValue("unit")}
+								type="text"
 								req={false}
 							/>
 							<TextQuestion
 								question="Tell us a little about yourself"
 								qid="Q4"
 								label="First Name"
+								type="text"
 								val={this.existingValue("Q4")}
 							/>
 							<TextQuestion
 								qid="Q5"
 								label="Last Name"
+								type="text"
 								val={this.existingValue("Q5")}
 							/>
-							<div className="question-container" style={{ marginTop: "4vh" }}>
-								<Cleave
-									placeholder="Date of Birth (MM/DD/YYYY)"
-									options={{
-										date: true,
-										delimiter: "/",
-										datePattern: ["m", "d", "Y"]
-									}}
-									className="input inner"
-									id="Q6"
-									value={this.existingValue("Q6")}
-								/>
-							</div>
+							<TextQuestion
+								question="Where can we send you a copy of your quotes?"
+								sub_question="We never, ever sell your info to third parties - we hate spam, too."
+								qid="Q25"
+								val={this.existingValue("Q25")}
+								type="email"
+								label="Email ID"
+							/>
 						</div>
 						<div className="next-page" onClick={this.back}>
 							&larr; Go Back

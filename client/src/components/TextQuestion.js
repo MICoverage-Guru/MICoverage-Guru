@@ -8,7 +8,7 @@ class TextQuestion extends Component {
 					id={this.props.qid}
 					name={this.props.qid}
 					className="input inner"
-					type="text"
+					type={this.props.type}
 					placeholder={this.props.label}
 					maxLength={this.props.max_chars}
 					defaultValue={this.props.val}
@@ -20,7 +20,7 @@ class TextQuestion extends Component {
 					id={this.props.qid}
 					name={this.props.qid}
 					className="input inner"
-					type="text"
+					type={this.props.type}
 					placeholder={this.props.label}
 					defaultValue={this.props.val}
 				/>

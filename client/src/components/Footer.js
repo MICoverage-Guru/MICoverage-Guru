@@ -13,22 +13,27 @@ class Footer extends Component {
 
 	getStarted = e => {
 		e.preventDefault();
-		localStorage.setItem("zip_code", document.getElementById("user-zip").value);
-		if (window.innerHeight < 690)
-			document.getElementsByClassName("extra-space")[0].style.paddingBottom =
-				"20vh";
-		else
-			document.getElementsByClassName("extra-space")[0].style.paddingBottom =
-				"10vh";
-		document.getElementsByClassName("landing-home")[0].style.display = "none";
-		document.getElementsByClassName("question-form")[0].style.display = "flex";
-		setTimeout(function() {
-			document.getElementsByClassName("question-form")[0].style.opacity = 1;
-		}, 100);
-		window.scroll({
-			top: 0,
-			behavior: "smooth"
-		});
+		if (!isNaN(document.getElementById("zip").value)) {
+			localStorage.setItem("zip_code", document.getElementById("zip").value);
+			if (window.innerHeight < 690)
+				document.getElementsByClassName("extra-space")[0].style.paddingBottom =
+					"20vh";
+			else
+				document.getElementsByClassName("extra-space")[0].style.paddingBottom =
+					"10vh";
+			document.getElementsByClassName("landing-home")[0].style.display = "none";
+			document.getElementsByClassName("question-form")[0].style.display =
+				"flex";
+			setTimeout(function() {
+				document.getElementsByClassName("question-form")[0].style.opacity = 1;
+			}, 100);
+			window.scroll({
+				top: 0,
+				behavior: "smooth"
+			});
+		} else {
+			alert("Please enter a valid zip code!");
+		}
 	};
 
 	async showContact() {
@@ -42,6 +47,7 @@ class Footer extends Component {
 				'<textarea rows="10" cols="5" id="swal-input4" class="swal2-input" style="height:7em; padding-top: 0.5em;" placeholder="Question (Optional)" />',
 			focusConfirm: false,
 			confirmButtonText: "SEND",
+			showCloseButton: true,
 			preConfirm: () => {
 				return [
 					document.getElementById("swal-input1").value,
@@ -123,8 +129,8 @@ class Footer extends Component {
 									alt="call icon"
 									src="https://img.icons8.com/material-outlined/40/000000/call-male.png"
 								/>{" "}
-								<p onClick={() => this.toNewLink("tel:5555551234")}>
-									(555) 555-1234
+								<p onClick={() => this.toLink("tel:+1 (833)-642-6837")}>
+									+1 (833)-642-6837
 								</p>
 								<br />
 								<img
@@ -133,7 +139,7 @@ class Footer extends Component {
 								/>
 								<p
 									className="footer-email-custom"
-									onClick={() => this.toLink("tel:5555551234")}
+									onClick={() => this.toLink("tel:+1 (833)-642-6837")}
 								>
 									admin@micoverageguru.com
 								</p>
@@ -155,7 +161,9 @@ class Footer extends Component {
 						<div className="footer-right">
 							<div className="footer-right-sec1">
 								<h1>Links</h1>
-								<p onClick={() => this.toLink("/#faq")}>FAQ & Media</p>
+								<p onClick={() => this.toLink("/#media-container")}>
+									FAQ & Media
+								</p>
 								<p onClick={this.showContact}>Contact us</p>
 							</div>
 							<div className="footer-right-sec2">
@@ -229,6 +237,12 @@ class Footer extends Component {
 							</div>
 						</div>
 					</div>
+					<p className="footer-about">
+						Insuretech LLC. (DBA Micoverageguru), a Michigan LLC, is a licensed
+						independent insurance broker. We do not underwrite any insurance
+						policy and all the information provided on this site has been
+						developed for general informational and educational purposes.
+					</p>
 				</footer>
 			</div>
 		);

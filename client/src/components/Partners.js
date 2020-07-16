@@ -18,7 +18,7 @@ class Partners extends Component {
 	}
 
 	componentDidMount() {
-		this.interval = setInterval(this.tick, 2000);
+		this.interval = setInterval(this.tick, 4000);
 	}
 
 	componentWillUnmount() {
@@ -38,7 +38,7 @@ class Partners extends Component {
 				<div className="partners-section">
 					<br />
 					<p>
-						We can provide quotes from several top-rated national and local
+						We provide quotes from several top-rated national and local
 						insurance companies in the United States.
 					</p>
 					<div className="partners-carousel-background">

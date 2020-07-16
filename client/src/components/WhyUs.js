@@ -7,6 +7,13 @@ class WhyUs extends Component {
 				<div className="why-container">
 					<br />
 					<h1>Why MICoverage Guru?</h1>
+					<p>
+						Michiganders have been overpaying for auto insurance: 100% more than
+						the national average. Due to a state-wide policy reform on July 2nd,
+						2020, every resident is eligible for savings of 30-50% on their auto
+						insurance. For the first time since 1972, you can decide your
+						medical coverage amount in the case of an accident.
+					</p>
 					<table className="why-table">
 						<thead>
 							<tr>

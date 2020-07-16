@@ -8,12 +8,12 @@ class HowItWorks extends Component {
 					<br />
 					<h1>How MICoverage Guru works</h1>
 					<p>
-						We are a technology company that makes auto-insurance cheaper, more
-						efficient, and hassle-free for the people of Michigan. Our experts
-						have 15+ years of experience in the automobile insurance industry
-						and specialize in the new auto insurance reform in Michigan. Unlike
-						other insurance companies, we work independently to help save
-						thousands of dollars for our customers.
+						We are an insurance-technology company that makes auto-insurance
+						cheaper, more efficient, and hassle-free for the people of Michigan.
+						Our experts have 15+ years of experience in auto insurance and
+						specialize in new auto insurance reform in Michigan. Unlike other
+						insurance companies, we work independently to help our customers
+						save thousands of dollars.
 					</p>
 					<div className="working-blocks">
 						<div className="block">
@@ -187,7 +187,7 @@ class HowItWorks extends Component {
 							</svg>
 							<h3>Step 1</h3>
 							<p>
-								Answer few questions in less than <b>90 seconds</b>
+								Fill an online form in less than <b>90 seconds</b>
 							</p>
 						</div>
 						<div className="block">
