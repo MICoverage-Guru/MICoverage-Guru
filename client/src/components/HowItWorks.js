@@ -8,12 +8,11 @@ class HowItWorks extends Component {
 					<br />
 					<h1>How MICoverage Guru works</h1>
 					<p>
-						We are an insurance-technology company that makes auto-insurance
-						cheaper, more efficient, and hassle-free for the people of Michigan.
-						Our experts have 15+ years of experience in auto insurance and
-						specialize in new auto insurance reform in Michigan. Unlike other
-						insurance companies, we work independently to help our customers
-						save thousands of dollars.
+						Michiganders have been overpaying for auto insurance: 100% more than
+						the national average. Due to a state-wide policy reform on July 2nd,
+						2020, every resident is eligible for savings of 30-50% on their auto
+						insurance. For the first time since 1972, you can decide your
+						medical coverage amount in the case of an accident.
 					</p>
 					<div className="working-blocks">
 						<div className="block">

@@ -91,7 +91,7 @@ class Navbar extends Component {
 						<img alt="main_logo" src={logo} onClick={this.goHome} />
 					</div>
 					<div className="links">
-						<p onClick={() => this.toLink("/#media-container")}>FAQ & Media</p>
+						<p onClick={() => this.toLink("/#media-container")}>Media & FAQ</p>
 						<p id="last-link" onClick={this.showContact}>
 							Contact us
 						</p>
@@ -116,7 +116,7 @@ class Navbar extends Component {
 					<div className="clear" />
 				</div>
 				<div className="responsive-links">
-					<p onClick={() => this.toLink("/#media-container")}>FAQ & Media</p>
+					<p onClick={() => this.toLink("/#media-container")}>Media & FAQ</p>
 					<p onClick={this.showContact}>Contact us</p>
 				</div>
 			</div>

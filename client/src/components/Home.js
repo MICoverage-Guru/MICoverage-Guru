@@ -70,7 +70,7 @@ class Home extends Component {
 			"Michigan residents pay <span>100% more</span> for car insurance than the rest of the U.S.",
 			"Get the most affordable <span>auto</span> and <span>home</span> insurance in Michigan!",
 			"Right now is the best time to <span>switch insurance</span> in Michigan.",
-			"Save up to <span>$1000</span> on auto insurance due to the new insurance reform in Michigan."
+			"Save up to <span>$1000</span> on auto insurance from Michigan’s new insurance reform."
 		];
 		var counter = 0;
 		var elem = $("#greeting");
@@ -96,8 +96,8 @@ class Home extends Component {
 						<div className="left-home">
 							<div className="fixed-height">
 								<h1 id="greeting">
-									Save up to <span>$1000</span> on auto insurance due to the new
-									insurance reform in Michigan.
+									Save up to <span>$1000</span> on auto insurance from
+									Michigan’s new insurance reform.
 								</h1>
 							</div>
 							<form onSubmit={this.getStarted}>

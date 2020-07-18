@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import Navbar from "./Navbar";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar } from "react-step-progress-bar";
-import TextField from "@material-ui/core/TextField";
+import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
+
 import Swal from "sweetalert2";
 import {
 	EmailShareButton,
@@ -48,7 +50,8 @@ class Complete extends Component {
 	constructor() {
 		super();
 		this.state = {
-			modalIsOpen: false
+			modalIsOpen: false,
+			selectedDate: new Date()
 		};
 
 		this.openModal = this.openModal.bind(this);
@@ -107,7 +110,7 @@ class Complete extends Component {
 	subForm(e) {
 		e.preventDefault();
 		this.closeModal();
-		var timestamp = document.getElementById("datetime-local").value;
+		var timestamp = document.getElementById("dt-scheduler").value;
 		const requestOptions = {
 			method: "POST",
 			headers: { "Content-Type": "application/json" },
@@ -150,6 +153,8 @@ class Complete extends Component {
 	closeModal = () => {
 		this.setState({ modalIsOpen: false });
 	};
+
+	setDate = dateTime => this.setState({ dateTime });
 
 	componentDidMount() {
 		Modal.setAppElement("#cont");
@@ -205,6 +210,12 @@ class Complete extends Component {
 			}
 		}
 	}
+
+	handleDateChange = datetime => {
+		this.setState({
+			selectedDate: datetime
+		});
+	};
 
 	render() {
 		return (
@@ -262,7 +273,7 @@ class Complete extends Component {
 							isOpen={this.state.modalIsOpen}
 							onRequestClose={this.closeModal}
 							style={customStyles}
-							contentLabel="Example Modal"
+							contentLabel="Example"
 						>
 							<div className="close-modal-btn" onClick={this.closeModal}>
 								<img
@@ -274,16 +285,17 @@ class Complete extends Component {
 								<center>
 									<p>Schedule an appointment</p>
 									<form className={styles.cont} onSubmit={this.subForm}>
-										<TextField
-											required
-											id="datetime-local"
-											label="Please pick a date and time"
-											type="datetime-local"
-											className={styles.textField}
-											InputLabelProps={{
-												shrink: true
-											}}
-										/>
+										<MuiPickersUtilsProvider utils={DateFnsUtils}>
+											<DateTimePicker
+												value={this.state.selectedDate}
+												disablePast
+												onChange={this.handleDateChange}
+												label="Please pick a date and time"
+												showTodayButton
+												id="dt-scheduler"
+												format="yyyy/MM/dd hh:mm a"
+											/>
+										</MuiPickersUtilsProvider>
 										<br />
 										<br />
 										<input

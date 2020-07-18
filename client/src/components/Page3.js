@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Navbar from "./Navbar";
-import TextQuestion from "./TextQuestion";
 import Question from "./Question";
 import "react-step-progress-bar/styles.css";
 import { ProgressBar } from "react-step-progress-bar";
+import Cleave from "cleave.js/react";
 import $ from "jquery";
 
 class Page3 extends Component {
@@ -20,8 +20,6 @@ class Page3 extends Component {
 		this.addVehicle = this.addVehicle.bind(this);
 		this.submit = this.submit.bind(this);
 		this.deleteVehicle = this.deleteVehicle.bind(this);
-		// this.fetchVehicleYears = this.fetchVehicleYears.bind(this);
-		// this.fetchVehicleMakes = this.fetchVehicleMakes.bind(this);
 	}
 	submit(e) {
 		e.preventDefault();
@@ -242,14 +240,25 @@ class Page3 extends Component {
 							qid={"v" + j + "-Q12"}
 							val={this.existingValue(i, "Q12")}
 						/>
-						<TextQuestion
-							question="How many miles do you drive?"
-							sub_question="Most drivers average 11,000 miles per year."
-							label="Miles"
-							qid={"v" + j + "-Q13"}
-							type="number"
-							val={this.existingValue(i, "Q13")}
-						/>
+						<div className="question-container" style={{ marginTop: "3vh" }}>
+							<div className="question">
+								<p id={"v" + j + "-Q13-qs"}>How many miles do you drive?</p>
+								<p className="sub">
+									Most drivers average 11,000 miles per year.
+								</p>
+							</div>
+							<Cleave
+								options={{
+									numericOnly: true
+								}}
+								className="input inner"
+								id={"v" + j + "-Q13"}
+								type="tel"
+								placeholder="Miles"
+								title="Please enter a valid amount of miles."
+								value={this.existingValue(i, "Q13")}
+							/>
+						</div>
 						<br />
 						<div className="question-container">
 							<div className="question-options">
@@ -259,10 +268,10 @@ class Page3 extends Component {
 									className="input-select"
 									defaultValue={this.existingValue(i, "Q13-metric")}
 								>
-									<option value="per year">Per year</option>
-									<option value="per month">Per month</option>
-									<option value="per week">Per week</option>
-									<option value="per day">Per day</option>
+									<option value="per year">Per Year</option>
+									<option value="per month">Per Month</option>
+									<option value="per week">Per Week</option>
+									<option value="per day">Per Day</option>
 								</select>
 							</div>
 						</div>
@@ -356,14 +365,25 @@ class Page3 extends Component {
 							qid={"v" + j + "-Q12"}
 							val={this.existingValue(i, "Q12")}
 						/>
-						<TextQuestion
-							question="How many miles do you drive?"
-							sub_question="Most drivers average 11,000 miles per year."
-							label="Miles"
-							qid={"v" + j + "-Q13"}
-							type="number"
-							val={this.existingValue(i, "Q13")}
-						/>
+						<div className="question-container" style={{ marginTop: "3vh" }}>
+							<div className="question">
+								<p id={"v" + j + "-Q13-qs"}>How many miles do you drive?</p>
+								<p className="sub">
+									Most drivers average 11,000 miles per year.
+								</p>
+							</div>
+							<Cleave
+								options={{
+									numericOnly: true
+								}}
+								className="input inner"
+								id={"v" + j + "-Q13"}
+								type="tel"
+								placeholder="Miles"
+								title="Please enter a valid amount of miles."
+								value={this.existingValue(i, "Q13")}
+							/>
+						</div>
 						<br />
 						<div className="question-container">
 							<div className="question-options">
@@ -373,10 +393,10 @@ class Page3 extends Component {
 									className="input-select"
 									defaultValue={this.existingValue(i, "Q13-metric")}
 								>
-									<option value="per year">Per year</option>
-									<option value="per month">Per month</option>
-									<option value="per week">Per week</option>
-									<option value="per day">Per day</option>
+									<option value="per year">Per Year</option>
+									<option value="per month">Per Month</option>
+									<option value="per week">Per Week</option>
+									<option value="per day">Per Day</option>
 								</select>
 							</div>
 						</div>

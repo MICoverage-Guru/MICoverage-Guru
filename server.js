@@ -15,9 +15,8 @@ app.use(nocache());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-app.use(express.static(path.join(__dirname, "build")));
 app.use(
-	serveStatic(path.join(__dirname, "build"), {
+	serveStatic(path.join(__dirname, "client/build"), {
 		maxAge: "1d",
 		setHeaders: setCustomCacheControl
 	})
@@ -56,7 +55,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 app.get("/*", (req, res) => {
-	res.sendFile(path.join(__dirname, "build", "index.html"));
+	res.sendFile(path.join(__dirname, "/client/build", "index.html"));
 });
 
 app.post("/api/submitInsuranceRequest", function(req, res) {
@@ -363,8 +362,8 @@ app.post("/api/getUserRecords", function(req, res) {
 					phone: obj.Q27,
 					apptPref: obj.appointmentPref
 						? obj.appointmentPref === "now"
-							? obj.appointmentPref
-							: obj.appointmentPref.split("T").join(" ")
+							? obj.appointmentPref.toString()
+							: obj.appointmentPref
 						: "didn't select"
 				};
 				toPushArray.push(toPushObj);

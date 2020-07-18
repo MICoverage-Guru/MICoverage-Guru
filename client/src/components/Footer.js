@@ -105,11 +105,12 @@ class Footer extends Component {
 								<h3>Ready to shop for Auto Insurance?</h3>
 								<form onSubmit={this.getStarted}>
 									<input
-										type="text"
+										type="tel"
 										id="user-zip"
 										name="user-zip"
 										className="zip-input"
 										placeholder="ZIP Code"
+										maxLength="5"
 										required
 									/>
 									<input
@@ -162,7 +163,7 @@ class Footer extends Component {
 							<div className="footer-right-sec1">
 								<h1>Links</h1>
 								<p onClick={() => this.toLink("/#media-container")}>
-									FAQ & Media
+									Media & FAQ
 								</p>
 								<p onClick={this.showContact}>Contact us</p>
 							</div>

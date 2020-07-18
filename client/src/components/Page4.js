@@ -326,6 +326,7 @@ class Page4 extends Component {
 									}}
 									className="input inner"
 									id="Q6"
+									type="tel"
 									pattern="\d{2}/\d{2}/\d{4}"
 									title="Please enter a valid date of birth."
 									value={this.existingValue("Q6")}
@@ -348,6 +349,7 @@ class Page4 extends Component {
 									className="input inner"
 									id="Q27"
 									pattern=".{14}"
+									type="tel"
 									title="Please enter a valid phone number."
 									value={this.existingValue("Q27")}
 								/>

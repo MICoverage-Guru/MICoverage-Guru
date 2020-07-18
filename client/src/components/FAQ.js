@@ -210,9 +210,9 @@ class FAQ extends Component {
 									as health care costs and the frequency of lawsuits continued
 									to rise, it meant that auto insurance costs rose
 									significantly, too. Today, Michigan has the{" "}
-									<b>most expensive</b>
-									auto insurance in the country Unsurprisingly, it is also
-									ranked 4th in the U.S. with about 20% of drivers uninsured.
+									<b>most expensive</b> auto insurance in the country
+									Unsurprisingly, it is also ranked 4th in the U.S. with about
+									20% of drivers uninsured.
 								</p>
 							</CollapsibleContent>
 							<CollapsibleHead className="additionalClassForHead3">
@@ -229,9 +229,8 @@ class FAQ extends Component {
 								<p>
 									While some parts of the law are already active, the parts that
 									impact your selection options for PIP coverage go into effect
-									on <b>July 2, 2020</b>. MI Coverage Guru is committed to
-									making the transition easy and saving money for you and your
-									family.
+									on <b>July 2, 2020</b>. MICoverage Guru is committed to making
+									the transition easy and saving money for you and your family.
 								</p>
 							</CollapsibleContent>
 							<CollapsibleHead className="additionalClassForHead4">

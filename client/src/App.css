@@ -1026,7 +1026,10 @@ pre {
 }
 
 .panel-accordion {
-	box-shadow: 0 2px 18px 7px hsla(0, 0%, 74.1%, 0.09);
+	background: #fff !important;
+	box-shadow: 5px 5px 20px 0 rgba(20, 20, 20, 0.06) !important;
+	border: 1px solid rgba(0, 0, 0, 0.04) !important;
+	color: #282c34 !important;
 	line-height: 30px;
 	font-size: 1em;
 	border-radius: 5px;
@@ -1379,6 +1382,14 @@ footer p {
 	margin-top: 5vh;
 }
 
+.MuiFormControl-root {
+	min-width: 100% !important;
+}
+
+.MuiInputBase-input {
+	min-width: 100% !important;
+}
+
 /* Responsive */
 
 /* Extra small devices (phones, 600px and down) */
@@ -1439,7 +1450,8 @@ footer p {
 	}
 
 	.how-it-works {
-		height: 180vh;
+		height: 175vh !important;
+		/* padding-bottom: 10vh; */
 	}
 
 	.md-radio input[type="radio"] {
@@ -1655,7 +1667,7 @@ footer p {
 	}
 
 	.how-it-works {
-		height: 198vh;
+		height: 215vh !important;
 	}
 
 	.referral p {
