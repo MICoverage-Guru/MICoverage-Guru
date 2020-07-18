@@ -22,7 +22,7 @@ app.use(
 		setHeaders: setCustomCacheControl
 	})
 );
-app.use(sslRedirect(["production"], 301));
+app.use(sslRedirect());
 
 function setCustomCacheControl(res, path) {
 	if (serveStatic.mime.lookup(path) === "text/html") {
