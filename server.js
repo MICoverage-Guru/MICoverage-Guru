@@ -1,5 +1,6 @@
 var express = require("express");
 const bodyParser = require("body-parser");
+var sslRedirect = require("heroku-ssl-redirect");
 var firebase = require("firebase");
 var app = express();
 var cors = require("cors");
@@ -21,6 +22,7 @@ app.use(
 		setHeaders: setCustomCacheControl
 	})
 );
+app.use(sslRedirect(["production"], 301));
 
 function setCustomCacheControl(res, path) {
 	if (serveStatic.mime.lookup(path) === "text/html") {
