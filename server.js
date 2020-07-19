@@ -1,6 +1,6 @@
 var express = require("express");
 const bodyParser = require("body-parser");
-var sslRedirect = require("heroku-ssl-redirect");
+var enforce = require("express-sslify");
 var firebase = require("firebase");
 var app = express();
 var cors = require("cors");
@@ -22,7 +22,7 @@ app.use(
 		setHeaders: setCustomCacheControl
 	})
 );
-app.use(sslRedirect());
+app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
 function setCustomCacheControl(res, path) {
 	if (serveStatic.mime.lookup(path) === "text/html") {
@@ -58,10 +58,7 @@ firebase.initializeApp(firebaseConfig);
 
 app.get("/*", (req, res) => {
 	res.sendFile(path.join(__dirname, "/client/build", "index.html"));
-});
-
-app.get("*", (req, res) => {
-	res.redirect("https://" + req.headers.host + req.url);
+	// res.redirect("https://" + req.headers.host + req.url);
 });
 
 app.post("/api/submitInsuranceRequest", function(req, res) {
