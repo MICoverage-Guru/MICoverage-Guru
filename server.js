@@ -60,6 +60,10 @@ app.get("/*", (req, res) => {
 	res.sendFile(path.join(__dirname, "/client/build", "index.html"));
 });
 
+app.get("*", (req, res) => {
+	res.redirect("https://" + req.headers.host + req.url);
+});
+
 app.post("/api/submitInsuranceRequest", function(req, res) {
 	let isInsured = false;
 	let isDealership = false;
