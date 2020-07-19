@@ -1,7 +1,7 @@
 var express = require("express");
 const bodyParser = require("body-parser");
-var enforce = require("express-sslify");
 var firebase = require("firebase");
+var forceSsl = require("force-ssl-heroku");
 var app = express();
 var cors = require("cors");
 var path = require("path");
@@ -24,12 +24,14 @@ app.use(
 );
 // app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
-if (process.env.NODE_ENV === "production") {
-	app.use((req, res) => {
-		if (req.header("x-forwarded-proto") !== "https")
-			res.redirect(`https://${req.header("host")}${req.url}`);
-	});
-}
+// if (process.env.NODE_ENV === "production") {
+// 	app.use((req, res) => {
+// 		if (req.header("x-forwarded-proto") !== "https")
+// 			res.redirect(`https://${req.header("host")}${req.url}`);
+// 	});
+// }
+
+app.use(forceSsl);
 
 function setCustomCacheControl(res, path) {
 	if (serveStatic.mime.lookup(path) === "text/html") {
