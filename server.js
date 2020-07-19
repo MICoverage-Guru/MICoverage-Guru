@@ -22,7 +22,14 @@ app.use(
 		setHeaders: setCustomCacheControl
 	})
 );
-app.use(enforce.HTTPS({ trustProtoHeader: true }));
+// app.use(enforce.HTTPS({ trustProtoHeader: true }));
+
+if (process.env.NODE_ENV === "production") {
+	app.use((req, res) => {
+		if (req.header("x-forwarded-proto") !== "https")
+			res.redirect(`https://${req.header("host")}${req.url}`);
+	});
+}
 
 function setCustomCacheControl(res, path) {
 	if (serveStatic.mime.lookup(path) === "text/html") {
