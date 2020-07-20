@@ -177,8 +177,8 @@ app.post("/api/submitInsuranceRequest", function(req, res) {
 		}
 	}
 	var msg = {
-		to: "autoleadsdemo@gmail.com",
-		from: "autoleadsdemo@gmail.com",
+		to: "admin@micoverageguru.com",
+		from: "admin@micoverageguru.com",
 		templateId: templates["new_user_submission"],
 		dynamic_template_data: user_data
 	};
@@ -294,7 +294,7 @@ app.post("/api/contactSubmit", function(req, res) {
 	};
 	var msg = {
 		to: "admin@micoverageguru.com",
-		from: "autoleadsdemo@gmail.com",
+		from: "admin@micoverageguru.com",
 		templateId: templates["contact_form_submission"],
 		dynamic_template_data: user_data
 	};
@@ -320,8 +320,8 @@ app.post("/api/referralSubmit", function(req, res) {
 		phone: req.body.phone
 	};
 	var msg = {
-		to: "autoleadsdemo@gmail.com",
-		from: "autoleadsdemo@gmail.com",
+		to: "admin@micoverageguru.com",
+		from: "admin@micoverageguru.com",
 		templateId: templates["referral_form_submission"],
 		dynamic_template_data: user_data
 	};
