@@ -1,7 +1,7 @@
 var express = require("express");
 const bodyParser = require("body-parser");
 var firebase = require("firebase");
-var secure = require("express-force-https");
+var secure = require("ssl-express-www");
 var app = express();
 var cors = require("cors");
 var path = require("path");
@@ -10,8 +10,6 @@ var serveStatic = require("serve-static");
 const sgMail = require("@sendgrid/mail");
 const http = require("http");
 var server = http.createServer(app);
-const nocache = require("nocache");
-app.use(nocache());
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -22,14 +20,13 @@ app.use(
 		setHeaders: setCustomCacheControl
 	})
 );
-// app.use(enforce.HTTPS({ trustProtoHeader: true }));
 
-// if (process.env.NODE_ENV === "production") {
-// 	app.use((req, res) => {
-// 		if (req.header("x-forwarded-proto") !== "https")
-// 			res.redirect(`https://${req.header("host")}${req.url}`);
-// 	});
-// }
+console.log(process.env.NODE_ENV);
+
+// app.use((req, res) => {
+// 	if (req.header("x-forwarded-proto") !== "https")
+// 		res.redirect(`https://${req.header("host")}${req.url}`);
+// });
 
 app.use(secure);
 
@@ -66,6 +63,7 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 app.get("/*", (req, res) => {
+	console.log(req.header("x-forwarded-proto"));
 	res.sendFile(path.join(__dirname, "/client/build", "index.html"));
 });
 
