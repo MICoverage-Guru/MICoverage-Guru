@@ -1,7 +1,7 @@
 var express = require("express");
 const bodyParser = require("body-parser");
 var firebase = require("firebase");
-var forceSsl = require("force-ssl-heroku");
+var secure = require("express-force-https");
 var app = express();
 var cors = require("cors");
 var path = require("path");
@@ -31,7 +31,7 @@ app.use(
 // 	});
 // }
 
-app.use(forceSsl);
+app.use(secure);
 
 function setCustomCacheControl(res, path) {
 	if (serveStatic.mime.lookup(path) === "text/html") {
@@ -66,13 +66,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 app.get("/*", (req, res) => {
-	if (window.location.protocol !== "https:") {
-		window.location =
-			"https://" +
-			window.location.hostname +
-			window.location.pathname +
-			window.location.hash;
-	}
 	res.sendFile(path.join(__dirname, "/client/build", "index.html"));
 });
 
