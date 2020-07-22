@@ -87,13 +87,13 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
 	-->
 		<script>
-			// var host = "www.micoverageguru.com" || "micoverageguru.com";
-			// if (
-			// 	host == window.location.host &&
-			// 	window.location.protocol != "https:"
-			// ) {
-			// 	window.location.protocol = "https";
-			// }
+			var host = "www.micoverageguru.com" || "micoverageguru.com";
+			if (
+				host == window.location.host &&
+				window.location.protocol != "https:"
+			) {
+				window.location.protocol = "https";
+			}
 		</script>
 		<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 		<!--

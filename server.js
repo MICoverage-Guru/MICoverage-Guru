@@ -21,12 +21,6 @@ app.use(
 );
 
 console.log(process.env.NODE_ENV);
-
-app.use((req, res) => {
-	if (req.header("x-forwarded-proto") !== "https")
-		res.redirect(`https://${req.header("host")}${req.url}`);
-});
-
 function setCustomCacheControl(res, path) {
 	if (serveStatic.mime.lookup(path) === "text/html") {
 		// Custom Cache-Control for HTML files
@@ -60,7 +54,6 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 app.get("/*", (req, res) => {
-	console.log(req.header("x-forwarded-proto"));
 	res.sendFile(path.join(__dirname, "/client/build", "index.html"));
 });
 
