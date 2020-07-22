@@ -1,7 +1,6 @@
 var express = require("express");
 const bodyParser = require("body-parser");
 var firebase = require("firebase");
-var secure = require("ssl-express-www");
 var app = express();
 var cors = require("cors");
 var path = require("path");
@@ -23,12 +22,10 @@ app.use(
 
 console.log(process.env.NODE_ENV);
 
-// app.use((req, res) => {
-// 	if (req.header("x-forwarded-proto") !== "https")
-// 		res.redirect(`https://${req.header("host")}${req.url}`);
-// });
-
-app.use(secure);
+app.use((req, res) => {
+	if (req.header("x-forwarded-proto") !== "https")
+		res.redirect(`https://${req.header("host")}${req.url}`);
+});
 
 function setCustomCacheControl(res, path) {
 	if (serveStatic.mime.lookup(path) === "text/html") {
