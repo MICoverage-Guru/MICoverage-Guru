@@ -66,8 +66,14 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 app.get("/*", (req, res) => {
+	if (window.location.protocol !== "https:") {
+		window.location =
+			"https://" +
+			window.location.hostname +
+			window.location.pathname +
+			window.location.hash;
+	}
 	res.sendFile(path.join(__dirname, "/client/build", "index.html"));
-	// res.redirect("https://" + req.headers.host + req.url);
 });
 
 app.post("/api/submitInsuranceRequest", function(req, res) {
@@ -177,7 +183,7 @@ app.post("/api/submitInsuranceRequest", function(req, res) {
 		}
 	}
 	var msg = {
-		to: "admin@micoverageguru.com",
+		to: "autoleadsdemo@gmail.com",
 		from: "admin@micoverageguru.com",
 		templateId: templates["new_user_submission"],
 		dynamic_template_data: user_data
