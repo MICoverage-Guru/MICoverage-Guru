@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Swal from "sweetalert2";
 import logo from "../hd-logo.jpg";
+import Helmet from "react-helmet";
 
 class Navbar extends Component {
 	toggleNav() {
@@ -119,6 +120,15 @@ class Navbar extends Component {
 					<p onClick={() => this.toLink("/#media-container")}>Media & FAQ</p>
 					<p onClick={this.showContact}>Contact us</p>
 				</div>
+				<Helmet>
+					<script
+						async
+						src="https://www.googletagmanager.com/gtag/js?id=AW-618021982"
+					></script>
+					<script>
+						{`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-618021982'); gtag('config', 'AW-618021982/8QDXCLucmdgBEN6I2aYC', { 'phone_conversion_number': '+1 (833)-642-6837' }); `}
+					</script>
+				</Helmet>
 			</div>
 		);
 	}

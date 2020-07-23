@@ -4,6 +4,7 @@ import "react-step-progress-bar/styles.css";
 import { ProgressBar } from "react-step-progress-bar";
 import { DateTimePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import Helmet from "react-helmet";
 
 import Swal from "sweetalert2";
 import {
@@ -373,6 +374,15 @@ class Complete extends Component {
 						filledBackground="linear-gradient(to right, #56ccf2, #2f80ed)"
 					/>
 				</div>
+				<Helmet>
+					<script
+						async
+						src="https://www.googletagmanager.com/gtag/js?id=AW-618021982"
+					></script>
+					<script>
+						{`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-618021982'); gtag('event', 'conversion', {'send_to': 'AW-618021982/T9aOCMeTmdgBEN6I2aYC'}); `}
+					</script>
+				</Helmet>
 			</div>
 		);
 	}

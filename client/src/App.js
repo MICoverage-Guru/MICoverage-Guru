@@ -7,6 +7,7 @@ import Page2 from "./components/Page2";
 import Page3 from "./components/Page3";
 import Page4 from "./components/Page4";
 import Complete from "./components/Complete";
+import CancelPolicy from "./components/CancelPolicy";
 import Login from "./components/Admin/Login";
 import UserDetails from "./components/Admin/UserDetails";
 
@@ -27,6 +28,7 @@ function App() {
 					<Route exact path="/complete" component={Complete} />
 					<Route exact path="/admin" component={Login} />
 					<Route exact path="/admin/user_details" component={UserDetails} />
+					<Route exact path="/cancel-policy" component={CancelPolicy} />
 					<Route component={NoMatchPage} />
 				</Switch>
 			</div>

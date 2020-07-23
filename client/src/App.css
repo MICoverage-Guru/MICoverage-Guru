@@ -1391,6 +1391,31 @@ footer p {
 	min-width: 100% !important;
 }
 
+.cancel-policy h1 {
+	font-family: "Gilroy Bold", sans-serif;
+	margin-top: 5vh;
+}
+
+.cancel-policy form {
+	display: block;
+}
+
+.cancel-policy .input,
+.cancel-policy .input-select,
+.cancel-policy .input-submit {
+	margin: 1rem auto;
+	display: block;
+	width: 400px;
+}
+
+.cancel-policy label {
+	/* font-weight: bold; */
+	display: block;
+	font-family: "Inter", sans-serif;
+	margin: 3rem auto 0 !important;
+	font-size: 1.3em;
+}
+
 /* Responsive */
 
 /* Extra small devices (phones, 600px and down) */
