@@ -49,18 +49,18 @@ class Page3 extends Component {
 			const q13_metric = document.getElementById(qid_prefix + "13-metric")
 				.value;
 			const q13_val = q13 + " " + q13_metric;
-			if (q7 === "") {
-				elem = document.getElementById("v" + i + "-heading");
+			if (q7 === "default") {
+				elem = document.getElementById(qid_prefix + "7-qs");
 				elem.style.color = "#e74c3c";
 				elem.scrollIntoView();
 				break;
-			} else if (q8 === "") {
-				elem = document.getElementById("v" + i + "-heading");
+			} else if (q8 === "default") {
+				elem = document.getElementById(qid_prefix + "8-qs");
 				elem.style.color = "#e74c3c";
 				elem.scrollIntoView();
 				break;
-			} else if (q9 === "") {
-				elem = document.getElementById("v" + i + "-heading");
+			} else if (q9 === "default") {
+				elem = document.getElementById(qid_prefix + "9-qs");
 				elem.style.color = "#e74c3c";
 				elem.scrollIntoView();
 				break;
@@ -301,6 +301,9 @@ class Page3 extends Component {
 									<option value="default">Select Year</option>
 								</select>
 							</div>
+							<div className="dropdown-loader" id={"v" + j + "-Q7-loader"}>
+								Loading...
+							</div>
 						</div>
 						<div className="question-container">
 							<div className="question">
@@ -315,6 +318,9 @@ class Page3 extends Component {
 								>
 									<option value="default">Select Make</option>
 								</select>
+							</div>
+							<div className="dropdown-loader" id={"v" + j + "-Q8-loader"}>
+								Loading...
 							</div>
 						</div>
 						<div className="question-container">
@@ -331,6 +337,9 @@ class Page3 extends Component {
 									<option value="default">Select Model</option>
 								</select>
 							</div>
+							<div className="dropdown-loader" id={"v" + j + "-Q9-loader"}>
+								Loading...
+							</div>
 						</div>
 						<div className="question-container">
 							<div className="question">
@@ -344,6 +353,9 @@ class Page3 extends Component {
 								>
 									<option value="default">Select Trim</option>
 								</select>
+							</div>
+							<div className="dropdown-loader" id={"v" + j + "-Q10-loader"}>
+								Loading...
 							</div>
 						</div>
 						<Question
@@ -419,12 +431,17 @@ class Page3 extends Component {
 
 	fetchVehicleYears = k => {
 		var years_elems = document.getElementById("v" + k + "-Q7");
+		years_elems.disabled = true;
+		document.getElementById("v" + k + "-Q7-loader").style.display =
+			"inline-block";
 		years_elems.innerHTML = "<option value='default'>Select Year</option>";
 		$.get(
 			"https://carmakemodeldb.com/api/v1/car-lists/get/years/desc" +
 				"?api_token=" +
 				this.state.apiToken,
 			data => {
+				years_elems.disabled = false;
+				document.getElementById("v" + k + "-Q7-loader").style.display = "none";
 				$.each(data, (index, element) => {
 					var v_index = k - 1;
 					if (
@@ -466,6 +483,9 @@ class Page3 extends Component {
 	fetchVehicleMakes = k => {
 		var vehicle_year = document.getElementById("v" + k + "-Q7").value;
 		var makes_elems = document.getElementById("v" + k + "-Q8");
+		makes_elems.disabled = true;
+		document.getElementById("v" + k + "-Q8-loader").style.display =
+			"inline-block";
 		makes_elems.innerHTML = "<option value='default'>Select Make</option>";
 		$.get(
 			"https://carmakemodeldb.com/api/v1/car-lists/get/makes/" +
@@ -473,6 +493,8 @@ class Page3 extends Component {
 				"?api_token=" +
 				this.state.apiToken,
 			data => {
+				makes_elems.disabled = false;
+				document.getElementById("v" + k + "-Q8-loader").style.display = "none";
 				$.each(data, (index, element) => {
 					var v_index = k - 1;
 					if (
@@ -515,6 +537,9 @@ class Page3 extends Component {
 		var vehicle_year = document.getElementById("v" + k + "-Q7").value;
 		var vehicle_make = document.getElementById("v" + k + "-Q8").value;
 		var models_elems = document.getElementById("v" + k + "-Q9");
+		models_elems.disabled = true;
+		document.getElementById("v" + k + "-Q9-loader").style.display =
+			"inline-block";
 		models_elems.innerHTML = "<option value='default'>Select Model</option>";
 		$.get(
 			"https://carmakemodeldb.com/api/v1/car-lists/get/models/" +
@@ -524,6 +549,8 @@ class Page3 extends Component {
 				"?api_token=" +
 				this.state.apiToken,
 			data => {
+				models_elems.disabled = false;
+				document.getElementById("v" + k + "-Q9-loader").style.display = "none";
 				$.each(data, (index, element) => {
 					var v_index = k - 1;
 					if (
@@ -567,6 +594,9 @@ class Page3 extends Component {
 		var vehicle_make = document.getElementById("v" + k + "-Q8").value;
 		var vehicle_model = document.getElementById("v" + k + "-Q9").value;
 		var trims_elems = document.getElementById("v" + k + "-Q10");
+		trims_elems.disabled = true;
+		document.getElementById("v" + k + "-Q10-loader").style.display =
+			"inline-block";
 		trims_elems.innerHTML = "<option value='default'>Select Trim</option>";
 		$.get(
 			"https://carmakemodeldb.com/api/v1/car-lists/get/trims/" +
@@ -578,6 +608,8 @@ class Page3 extends Component {
 				"?api_token=" +
 				this.state.apiToken,
 			data => {
+				trims_elems.disabled = false;
+				document.getElementById("v" + k + "-Q10-loader").style.display = "none";
 				$.each(data, (index, element) => {
 					var v_index = k - 1;
 					if (

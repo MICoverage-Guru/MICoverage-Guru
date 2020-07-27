@@ -59,14 +59,14 @@ class Complete extends Component {
 		this.closeModal = this.closeModal.bind(this);
 		this.subForm = this.subForm.bind(this);
 	}
-	componentWillMount() {
-		if (
-			!localStorage.getItem("zip_code") ||
-			!localStorage.getItem("insurance_type")
-		) {
-			window.location.href = "/form/4";
-		}
-	}
+	// componentWillMount() {
+	// 	if (
+	// 		!localStorage.getItem("zip_code") ||
+	// 		!localStorage.getItem("insurance_type")
+	// 	) {
+	// 		window.location.href = "/form/4";
+	// 	}
+	// }
 
 	back() {
 		window.location.href = "/";
@@ -219,6 +219,8 @@ class Complete extends Component {
 	};
 
 	render() {
+		const share_caption =
+			"Check out MICoverage Guru! \n>>>>>>>>>>>>>> \nMichiganders have been overpaying for auto insurance since 1972: 100% more than the national average. Due to a state-wide policy reform on July 2nd, 2020, every resident is eligible for savings of 30-50% on their auto insurance. Answer a few questions on micoverageguru.com to instantly get the advice, quotes, and savings you need!";
 		return (
 			<div className="container" id="cont">
 				<Navbar />
@@ -330,7 +332,7 @@ class Complete extends Component {
 						</p>
 						<FacebookShareButton
 							url="http://www.micoverageguru.com/"
-							quote="Check out MICoverage Guru!"
+							quote={share_caption}
 						>
 							<FacebookIcon size={50} round={true} />
 						</FacebookShareButton>
@@ -348,19 +350,19 @@ class Complete extends Component {
 						</TwitterShareButton>
 						<LinkedinShareButton
 							url="http://www.micoverageguru.com/"
-							title="Check out MICoverage Guru!"
+							title={share_caption}
 						>
 							<LinkedinIcon size={50} round={true} />
 						</LinkedinShareButton>
 						<EmailShareButton
 							url="http://www.micoverageguru.com/"
-							subject="Check out MICoverage Guru!"
+							subject={share_caption}
 						>
 							<EmailIcon size={50} round={true} />
 						</EmailShareButton>
 						<WhatsappShareButton
 							url="http://www.micoverageguru.com/"
-							title="Check out MICoverage Guru!"
+							title={share_caption}
 						>
 							<WhatsappIcon size={50} round={true} />
 						</WhatsappShareButton>

@@ -13,8 +13,11 @@ class Footer extends Component {
 
 	getStarted = e => {
 		e.preventDefault();
-		if (!isNaN(document.getElementById("zip").value)) {
-			localStorage.setItem("zip_code", document.getElementById("zip").value);
+		if (!isNaN(document.getElementById("user-zip").value)) {
+			localStorage.setItem(
+				"zip_code",
+				document.getElementById("user-zip").value
+			);
 			if (window.innerHeight < 690)
 				document.getElementsByClassName("extra-space")[0].style.paddingBottom =
 					"20vh";

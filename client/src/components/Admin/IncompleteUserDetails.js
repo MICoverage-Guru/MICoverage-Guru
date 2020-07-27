@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import FilterableTable from "react-filterable-table";
 import AdminNav from "./AdminNav";
 
-class UserDetails extends Component {
+class IncompleteUserDetails extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -20,7 +20,7 @@ class UserDetails extends Component {
 				})
 			};
 
-			fetch("/api/getUserRecords", requestOptions).then(res => {
+			fetch("/api/getIncompleteUserRecords", requestOptions).then(res => {
 				res.json().then(data => {
 					this.setState({ userObjs: data });
 				});
@@ -55,14 +55,32 @@ class UserDetails extends Component {
 				sortable: true
 			},
 			{
-				name: "phone",
-				displayName: "Phone",
+				name: "address",
+				displayName: "Address",
 				inputFilterable: true,
 				sortable: true
 			},
 			{
-				name: "apptPref",
-				displayName: "Appointment Preference",
+				name: "zip_code",
+				displayName: "ZIP Code",
+				inputFilterable: true,
+				sortable: true
+			},
+			{
+				name: "insurance_type",
+				displayName: "Insurance Type",
+				inputFilterable: true,
+				sortable: true
+			},
+			{
+				name: "isInsured",
+				displayName: "Insured",
+				inputFilterable: true,
+				sortable: true
+			},
+			{
+				name: "home",
+				displayName: "Own/Rent Home",
 				inputFilterable: true,
 				sortable: true
 			},
@@ -76,7 +94,7 @@ class UserDetails extends Component {
 		return (
 			<div>
 				<AdminNav />
-				<h1 className="admin-heading">User Details</h1>
+				<h1 className="admin-heading">Incomplete User Details</h1>
 				<FilterableTable
 					namespace="People"
 					initialSort="submission_timestamp"
@@ -91,4 +109,4 @@ class UserDetails extends Component {
 	}
 }
 
-export default UserDetails;
+export default IncompleteUserDetails;

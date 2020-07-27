@@ -9,7 +9,9 @@ import Page4 from "./components/Page4";
 import Complete from "./components/Complete";
 import CancelPolicy from "./components/CancelPolicy";
 import Login from "./components/Admin/Login";
+import AdminPanel from "./components/Admin/AdminPanel";
 import UserDetails from "./components/Admin/UserDetails";
+import IncompleteUserDetails from "./components/Admin/IncompleteUserDetails";
 
 const NoMatchPage = () => {
 	return <h3>404 - Not found</h3>;
@@ -26,8 +28,14 @@ function App() {
 					<Route exact path="/form/3" component={Page3} />
 					<Route exact path="/form/4" component={Page4} />
 					<Route exact path="/complete" component={Complete} />
-					<Route exact path="/admin" component={Login} />
-					<Route exact path="/admin/user_details" component={UserDetails} />
+					<Route exact path="/agent" component={Login} />
+					<Route exact path="/agent/home" component={AdminPanel} />
+					<Route exact path="/agent/user_details" component={UserDetails} />
+					<Route
+						exact
+						path="/agent/incomplete_user_details"
+						component={IncompleteUserDetails}
+					/>
 					<Route exact path="/cancel-policy" component={CancelPolicy} />
 					<Route component={NoMatchPage} />
 				</Switch>

@@ -46,7 +46,18 @@ class Page2 extends Component {
 			localStorage.setItem("Q4", q4);
 			localStorage.setItem("Q5", q5);
 			localStorage.setItem("Q25", q25);
-			window.location.href = "/form/3";
+			const requestOptions = {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify(localStorage)
+			};
+			fetch("/api/checkpointSubmitInfo", requestOptions)
+				.then(response => response.json())
+				.then(data => {
+					if (data.success === 1) {
+						window.location.href = "/form/3";
+					}
+				});
 		}
 	}
 

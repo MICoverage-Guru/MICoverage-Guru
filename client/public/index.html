@@ -122,7 +122,10 @@
 		-->
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBeXxFZhJp4cZ8Wtc_dOq4tcg1hL6IFBos&libraries=places"></script>
 		<script>
-			if (window.location.pathname === "/admin/user_details") {
+			if (
+				window.location.pathname === "/agent/user_details" ||
+				window.location.pathname === "/agent/incomplete_user_details"
+			) {
 				document.write(
 					'<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">'
 				);
