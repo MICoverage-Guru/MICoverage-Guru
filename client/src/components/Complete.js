@@ -59,14 +59,14 @@ class Complete extends Component {
 		this.closeModal = this.closeModal.bind(this);
 		this.subForm = this.subForm.bind(this);
 	}
-	// componentWillMount() {
-	// 	if (
-	// 		!localStorage.getItem("zip_code") ||
-	// 		!localStorage.getItem("insurance_type")
-	// 	) {
-	// 		window.location.href = "/form/4";
-	// 	}
-	// }
+	componentWillMount() {
+		if (
+			!localStorage.getItem("zip_code") ||
+			!localStorage.getItem("insurance_type")
+		) {
+			window.location.href = "/form/4";
+		}
+	}
 
 	back() {
 		window.location.href = "/";
@@ -386,16 +386,8 @@ class Complete extends Component {
 					</script>
 					{/* Facebook Pixel Code */}
 					<script>
-						{`!function(e,t,n,a,c,o,f){e.fbq||(c=e.fbq=function(){c.callMethod?c.callMethod.apply(c,arguments):c.queue.push(arguments)},e._fbq||(e._fbq=c),c.push=c,c.loaded=!0,c.version="2.0",c.queue=[],(o=t.createElement(n)).async=!0,o.src="https://connect.facebook.net/en_US/fbevents.js",(f=t.getElementsByTagName(n)[0]).parentNode.insertBefore(o,f))}(window,document,"script"),fbq("init","288452875833136"),fbq("track","PageView"),fbq("track","Lead"); `}
+						{`!function(e,t,n,a,c,o,f){e.fbq||(c=e.fbq=function(){c.callMethod?c.callMethod.apply(c,arguments):c.queue.push(arguments)},e._fbq||(e._fbq=c),c.push=c,c.loaded=!0,c.version="2.0",c.queue=[],(o=t.createElement(n)).async=!0,o.src="https://connect.facebook.net/en_US/fbevents.js",(f=t.getElementsByTagName(n)[0]).parentNode.insertBefore(o,f))}(window,document,"script"),fbq("init","288452875833136"),fbq("track","PageView"),fbq("track","Lead");`}
 					</script>
-					<noscript>
-						<img
-							height="1"
-							width="1"
-							style="display:none"
-							src="https://www.facebook.com/tr?id=288452875833136&ev=PageView&noscript=1"
-						/>
-					</noscript>
 					{/* End Facebook Pixel Code */}
 				</Helmet>
 			</div>
