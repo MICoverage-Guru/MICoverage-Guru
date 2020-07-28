@@ -343,8 +343,10 @@ input[type="number"] {
 }
 
 .dropdown-loader {
-	font-family: "Inter", sans-serif;
+	font-family: "Gilroy Bold", sans-serif;
 	margin: 1rem;
+	font-size: 1.2em;
+	color: #627df7;
 	display: none;
 }
 

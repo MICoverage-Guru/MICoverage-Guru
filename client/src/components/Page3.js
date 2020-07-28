@@ -176,6 +176,9 @@ class Page3 extends Component {
 									<option value="default">Select Year</option>
 								</select>
 							</div>
+							<div className="dropdown-loader" id={"v" + j + "-Q7-loader"}>
+								Loading...
+							</div>
 						</div>
 						<div className="question-container">
 							<div className="question">
@@ -190,6 +193,9 @@ class Page3 extends Component {
 								>
 									<option value="default">Select Make</option>
 								</select>
+							</div>
+							<div className="dropdown-loader" id={"v" + j + "-Q8-loader"}>
+								Loading...
 							</div>
 						</div>
 						<div className="question-container">
@@ -206,6 +212,9 @@ class Page3 extends Component {
 									<option value="default">Select Model</option>
 								</select>
 							</div>
+							<div className="dropdown-loader" id={"v" + j + "-Q9-loader"}>
+								Loading...
+							</div>
 						</div>
 						<div className="question-container">
 							<div className="question">
@@ -219,6 +228,9 @@ class Page3 extends Component {
 								>
 									<option value="default">Select Trim</option>
 								</select>
+							</div>
+							<div className="dropdown-loader" id={"v" + j + "-Q10-loader"}>
+								Loading...
 							</div>
 						</div>
 						<Question
