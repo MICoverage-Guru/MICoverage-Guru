@@ -384,6 +384,19 @@ class Complete extends Component {
 					<script>
 						{`window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-618021982'); gtag('event', 'conversion', {'send_to': 'AW-618021982/T9aOCMeTmdgBEN6I2aYC'}); `}
 					</script>
+					{/* Facebook Pixel Code */}
+					<script>
+						{`!function(e,t,n,a,c,o,f){e.fbq||(c=e.fbq=function(){c.callMethod?c.callMethod.apply(c,arguments):c.queue.push(arguments)},e._fbq||(e._fbq=c),c.push=c,c.loaded=!0,c.version="2.0",c.queue=[],(o=t.createElement(n)).async=!0,o.src="https://connect.facebook.net/en_US/fbevents.js",(f=t.getElementsByTagName(n)[0]).parentNode.insertBefore(o,f))}(window,document,"script"),fbq("init","288452875833136"),fbq("track","PageView"),fbq("track","Lead"); `}
+					</script>
+					<noscript>
+						<img
+							height="1"
+							width="1"
+							style="display:none"
+							src="https://www.facebook.com/tr?id=288452875833136&ev=PageView&noscript=1"
+						/>
+					</noscript>
+					{/* End Facebook Pixel Code */}
 				</Helmet>
 			</div>
 		);
