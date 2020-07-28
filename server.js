@@ -177,8 +177,7 @@ app.post("/api/submitInsuranceRequest", function(req, res) {
 		}
 	}
 	var msg = {
-		to: "micoverageguru@provisionagency.com",
-		cc: "autoleadsdemo@gmail.com",
+		to: "autoleadsdemo@gmail.com",
 		from: "admin@micoverageguru.com",
 		reply_to: "autoleadsdemo@gmail.com",
 		templateId: templates["new_user_submission"],
