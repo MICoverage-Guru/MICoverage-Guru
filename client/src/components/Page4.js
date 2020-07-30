@@ -110,6 +110,10 @@ class Page4 extends Component {
 			localStorage.setItem("Q6", q6);
 			localStorage.setItem("Q26", q26);
 			localStorage.setItem("Q27", q27);
+			localStorage.setItem(
+				"submission_timestamp",
+				new Date().toLocaleString("en-GB", { timeZone: "America/Detroit" })
+			);
 			if (this.state.dealership) {
 				localStorage.setItem("Q28", document.getElementById("Q28").value);
 			}

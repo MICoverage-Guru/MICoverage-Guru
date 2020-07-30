@@ -93,9 +93,7 @@ app.post("/api/submitInsuranceRequest", function(req, res) {
 				Q27: req.body.Q27,
 				dealership: isDealership,
 				Q28: req.body.Q28,
-				submission_timestamp: new Date().toLocaleString("en-US", {
-					timeZone: "America/Detroit"
-				})
+				submission_timestamp: req.body.submission_timestamp
 			};
 		} else {
 			user_data = {
@@ -118,9 +116,7 @@ app.post("/api/submitInsuranceRequest", function(req, res) {
 				Q26: req.body.Q26,
 				Q27: req.body.Q27,
 				dealership: isDealership,
-				submission_timestamp: new Date().toLocaleString("en-US", {
-					timeZone: "America/Detroit"
-				})
+				submission_timestamp: req.body.submission_timestamp
 			};
 		}
 	} else {
@@ -146,9 +142,7 @@ app.post("/api/submitInsuranceRequest", function(req, res) {
 				Q27: req.body.Q27,
 				dealership: isDealership,
 				Q28: req.body.Q28,
-				submission_timestamp: new Date().toLocaleString("en-US", {
-					timeZone: "America/Detroit"
-				})
+				submission_timestamp: req.body.submission_timestamp
 			};
 		} else {
 			user_data = {
@@ -170,9 +164,7 @@ app.post("/api/submitInsuranceRequest", function(req, res) {
 				Q26: req.body.Q26,
 				Q27: req.body.Q27,
 				dealership: isDealership,
-				submission_timestamp: new Date().toLocaleString("en-US", {
-					timeZone: "America/Detroit"
-				})
+				submission_timestamp: req.body.submission_timestamp
 			};
 		}
 	}
@@ -216,9 +208,7 @@ app.post("/api/checkpointSubmitInfo", function(req, res) {
 		Q4: req.body.Q4,
 		Q5: req.body.Q5,
 		Q25: req.body.Q25,
-		submission_timestamp: new Date().toLocaleString("en-US", {
-			timeZone: "America/Detroit"
-		})
+		submission_timestamp: req.body.submission_timestamp
 	};
 
 	const user_database = firebase

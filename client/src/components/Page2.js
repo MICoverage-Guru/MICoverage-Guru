@@ -46,6 +46,10 @@ class Page2 extends Component {
 			localStorage.setItem("Q4", q4);
 			localStorage.setItem("Q5", q5);
 			localStorage.setItem("Q25", q25);
+			localStorage.setItem(
+				"submission_timestamp",
+				new Date().toLocaleString("en-GB", { timeZone: "America/Detroit" })
+			);
 			const requestOptions = {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
