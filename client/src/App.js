@@ -39,16 +39,6 @@ function App() {
 						component={IncompleteUserDetails}
 					/>
 					<Route exact path="/cancel-policy" component={CancelPolicy} />
-					<Route
-						exact
-						path="/micoverageguru"
-						component={() => {
-							global.window &&
-								(global.window.location.href =
-									"https://www.webpulse.co/micoverageguru/");
-							return null;
-						}}
-					/>
 					<Route component={NoMatchPage} />
 				</Switch>
 			</div>
