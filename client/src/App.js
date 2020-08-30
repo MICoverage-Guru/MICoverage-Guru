@@ -12,6 +12,7 @@ import Login from "./components/Admin/Login";
 import AdminPanel from "./components/Admin/AdminPanel";
 import UserDetails from "./components/Admin/UserDetails";
 import IncompleteUserDetails from "./components/Admin/IncompleteUserDetails";
+import PrefeedZip from "./components/PrefeedZip";
 
 const NoMatchPage = () => {
 	return <h3>404 - Not found</h3>;
@@ -23,6 +24,7 @@ function App() {
 			<div className="App">
 				<Switch>
 					<Route exact path="/" component={Home} />
+					<Route exact path="/zip_code/:zip_code" component={PrefeedZip} />
 					<Route exact path="/form/1" component={Page1} />
 					<Route exact path="/form/2" component={Page2} />
 					<Route exact path="/form/3" component={Page3} />
@@ -37,6 +39,16 @@ function App() {
 						component={IncompleteUserDetails}
 					/>
 					<Route exact path="/cancel-policy" component={CancelPolicy} />
+					<Route
+						exact
+						path="/micoverageguru"
+						component={() => {
+							global.window &&
+								(global.window.location.href =
+									"https://www.webpulse.co/micoverageguru/");
+							return null;
+						}}
+					/>
 					<Route component={NoMatchPage} />
 				</Switch>
 			</div>
